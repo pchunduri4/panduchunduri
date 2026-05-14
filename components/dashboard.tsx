@@ -121,12 +121,12 @@ export function Dashboard() {
         <section className="mb-12">
           <div className="mb-4">
             <h2 className="text-lg font-semibold text-foreground">Strategic Dispatch</h2>
-            <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
+            <p className="text-sm text-muted-foreground mt-1 max-w-4xl">
               Three focus areas as tabs—open any field note for the slide-over, or share a{" "}
               <span className="font-mono text-foreground/80">/dispatch/…</span> link directly.
             </p>
           </div>
-          <div className="max-w-3xl">
+          <div className="max-w-6xl w-full">
             <StrategicDispatch />
           </div>
         </section>

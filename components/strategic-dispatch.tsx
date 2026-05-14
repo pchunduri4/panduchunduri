@@ -110,19 +110,22 @@ export function StrategicDispatch() {
               )
             })}
           </div>
-          <p className="text-[11px] text-muted-foreground mt-3 leading-snug max-w-3xl">
+          <p className="text-[11px] text-muted-foreground mt-3 leading-snug max-w-5xl">
             {tabMeta.subtitle}
           </p>
         </div>
 
-        <ul className="flex flex-col divide-y divide-border">
+        <ul
+          className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-border border-t border-border"
+          role="list"
+        >
           {rows.map((item: DispatchSnapshot) => (
-            <li key={item.slug}>
+            <li key={item.slug} className="bg-card min-w-0">
               <button
                 type="button"
                 onClick={() => openSnapshot(item.slug)}
                 className={cn(
-                  "group flex w-full items-start gap-3 px-4 sm:px-6 py-4 text-left",
+                  "group flex w-full min-h-[4.5rem] items-start gap-3 px-4 sm:px-5 py-3.5 lg:py-4 text-left h-full",
                   "hover:bg-muted/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
                 )}
               >
@@ -130,12 +133,13 @@ export function StrategicDispatch() {
                   <ListTree className="size-3.5" aria-hidden />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-sm leading-snug text-foreground group-hover:text-primary transition-colors">
+                  <span className="block text-sm leading-snug text-foreground group-hover:text-primary transition-colors line-clamp-2">
                     {item.title}
                   </span>
                   <Link
                     href={`/dispatch/${item.slug}`}
-                    className="mt-1 inline-block font-mono text-[10px] text-primary/80 hover:underline truncate max-w-full"
+                    className="mt-1 block font-mono text-[10px] text-primary/80 hover:underline truncate"
+                    title={`/dispatch/${item.slug}`}
                     onClick={(e) => e.stopPropagation()}
                   >
                     /{item.slug}
