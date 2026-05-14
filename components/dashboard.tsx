@@ -5,12 +5,14 @@ import { GraduationCap, Brain, Search, Sparkles } from "lucide-react"
 import { InsightCard } from "./insight-card"
 import { LiveExperiments } from "./live-experiments"
 import { CommandSearch } from "./command-search"
+import { StrategicDispatch } from "./strategic-dispatch"
 
-const featuredInsights = [
+/** Three pillar theses — concise one-liners; full depth lives on each route. */
+const pillarTheses = [
   {
     title: "Architecting $1B+ AI Platforms",
     thesis:
-      "Engineering the transition from static database architectures to Agentic Commerce. Specializing in the orchestration of multi-million SKU environments where factual fidelity and real-time LLM grounding are the primary drivers of enterprise value. Focus: Catalog automation and agentic procurement.",
+      "Agentic commerce at catalog scale: orchestration, grounding, and enterprise value when millions of SKUs meet real-time LLMs.",
     readTime: "18 min",
     category: "Deep-Tech AI Systems (The Anvil)",
     icon: Brain,
@@ -19,7 +21,7 @@ const featuredInsights = [
   {
     title: "From Zero-to-One to One-to-Infinity",
     thesis:
-      "A framework for scaling intelligent systems through the 'Chaos Phase' of Series C/D growth. This thesis focuses on transitioning from experimental AI features to robust, production-grade ML platforms that support global retail operations without incurring unsustainable technical debt.",
+      "Scaling through the chaos phase: production ML platforms, global retail load, and technical debt you can actually service.",
     readTime: "20 min",
     category: "Scaling & Platform Strategy (The Calculus)",
     icon: GraduationCap,
@@ -28,7 +30,7 @@ const featuredInsights = [
   {
     title: "Beyond SEO: Preparing for the Agentic Era",
     thesis:
-      "The search bar is dying. In the age of Answer Engine Optimization (AEO), product data must be 'decision-grade.' This research explores how brands can maintain visibility in agentic workflows and LLM-generated citations by prioritizing semantic relevance over keyword density.",
+      "AEO / GEO: decision-grade product data, citations, and what breaks when humans stop being the only shopper.",
     readTime: "12 min",
     category: "AEO/GEO & Future of Search (The Edge)",
     icon: Search,
@@ -58,27 +60,22 @@ const itemVariants = {
 export function Dashboard() {
   return (
     <div className="flex-1 min-h-screen bg-background">
-      {/* Header */}
       <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-sm border-b border-border">
         <div className="px-6 py-4">
           <CommandSearch />
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="px-6 py-8">
-        {/* Welcome Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-8"
+          className="mb-10"
         >
           <div className="flex items-center gap-2 mb-2">
             <Sparkles className="w-5 h-5 text-primary" />
-            <span className="text-sm text-muted-foreground font-medium">
-              Strategic Dispatch
-            </span>
+            <span className="text-sm text-muted-foreground font-medium">At a glance</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
             Product Architect: Scalable AI & Agentic Systems
@@ -90,16 +87,15 @@ export function Dashboard() {
           </p>
         </motion.div>
 
-        {/* Featured Insights Grid */}
-        <section className="mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold text-foreground">
-              Featured Insights
-            </h2>
-            <span className="text-sm text-muted-foreground">
-              {featuredInsights.length} theses
-            </span>
+        {/* Pillar Theses — high-impact cards */}
+        <section className="mb-10">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-foreground">Pillar Theses</h2>
+            <span className="text-sm text-muted-foreground">{pillarTheses.length} core articles</span>
           </div>
+          <p className="text-sm text-muted-foreground mb-6 max-w-3xl">
+            Long-form theses—each card links to a full write-up.
+          </p>
 
           <motion.div
             variants={containerVariants}
@@ -107,15 +103,27 @@ export function Dashboard() {
             animate="visible"
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
           >
-            {featuredInsights.map((insight) => (
+            {pillarTheses.map((insight) => (
               <motion.div key={insight.href} variants={itemVariants}>
-                <InsightCard {...insight} />
+                <InsightCard {...insight} emphasis="pillar" />
               </motion.div>
             ))}
           </motion.div>
         </section>
 
-        {/* Live Experiments Widget */}
+        {/* Strategic Dispatch — micro-insights */}
+        <section className="mb-12">
+          <div className="mb-4">
+            <h2 className="text-lg font-semibold text-foreground">Strategic Dispatch</h2>
+            <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
+              Micro-insights and field notes—compact list between pillar theses.
+            </p>
+          </div>
+          <div className="max-w-3xl">
+            <StrategicDispatch />
+          </div>
+        </section>
+
         <section>
           <LiveExperiments />
         </section>

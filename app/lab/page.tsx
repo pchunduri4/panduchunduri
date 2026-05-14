@@ -29,7 +29,8 @@ const experiments: Experiment[] = [
   },
   {
     title: "CDQ Scoring System",
-    description: "Catalog Data Quality scoring to measure product data readiness for AI consumption without invented claims.",
+    description:
+      "Proprietary heuristic for measuring factual grounding in multi-modal retail catalogs.",
     status: "live",
     hypothesis: "CDQ scores predict AI agent eligibility with 90%+ accuracy",
     metric: "87% correlation",
