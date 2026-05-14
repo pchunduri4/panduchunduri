@@ -9,7 +9,8 @@ import {
   Workflow,
   BarChart3,
   ShieldCheck,
-  FlaskConical,
+  Layers,
+  Network,
 } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -45,7 +46,7 @@ const workstreams: Workstream[] = [
     name: "Agentic Catalog Orchestration",
     statusKey: "phase2",
     description:
-      "Solving for token-limit bottlenecks and state-management in 10M+ SKU RAG environments.",
+      "Global-scale orchestration for token budgets, subgraph retrieval, and grounded agent responses across 10M+ SKUs.",
     progress: 68,
     href: "/lab/agentic-commerce",
     specType: "logic",
@@ -64,7 +65,7 @@ const workstreams: Workstream[] = [
     name: "Catalog Fidelity Index (CFI)",
     statusKey: "operational",
     description:
-      "A proprietary scoring framework for measuring factual grounding and semantic relevance in multi-modal LLM outputs.",
+      "Enterprise metric layer for factual grounding, semantic relevance, and multi-modal evidence in agent-facing catalog outputs.",
     progress: 82,
     href: "/lab/catalog-fidelity-index",
     specType: "metric",
@@ -82,19 +83,19 @@ const workstreams: Workstream[] = [
   },
   {
     id: "3",
-    name: "Responsible AI & Governance",
+    name: "Autonomous Governance & Guardrails",
     statusKey: "framework",
     description:
-      "Risk mitigation protocols for autonomous buying agents, focusing on budget guardrails and factual fidelity gates.",
+      "System-wide controls for autonomous buying and negotiation: budget envelopes, fidelity gates, and auditable escalation paths.",
     progress: 90,
     href: "/lab/responsible-ai",
-    specType: "governance",
+    specType: "flow",
     mermaid: `flowchart LR
-  AG[Autonomous buying agent] --> BG[Budget guardrails]
+  AG[Autonomous agent] --> BG[Budget guardrails]
   AG --> FF[Factual fidelity gate]
   FF -->|fail| ES[Escalation and safe path]
   FF -->|pass| EX[Execute within policy envelope]`,
-    pseudo: `GOVERNANCE ARCHITECTURE (conceptual)
+    pseudo: `SYSTEM FLOW (conceptual)
   MAP agent intents to risk tiers and spend envelopes
   REQUIRE fidelity checks before irreversible procurement actions
   LOG every override with owner, policy version, and evidence pointer
@@ -102,13 +103,13 @@ const workstreams: Workstream[] = [
   },
   {
     id: "4",
-    name: "Multi-Modal Ingestion Engine",
+    name: "Multi-modal Ingestion Architecture",
     statusKey: "rnd",
     description:
-      "Architecting the transition from unstructured catalog assets (images/PDFs) to decision-grade structured data for agents.",
+      "Ingestion spine for unstructured global supplier assets—PDFs, imagery, tables—promoted into decision-grade structured graph for agents.",
     progress: 42,
     href: "/lab/multimodal-ingestion",
-    specType: "flow",
+    specType: "logic",
     mermaid: `flowchart LR
   RAW[PDFs images tables] --> NORM[Normalize and extract]
   NORM --> SCHEMA[Decision-grade schema]
@@ -126,26 +127,26 @@ const statusStyles: Record<
   { label: string; icon: typeof Activity; color: string; bg: string }
 > = {
   phase2: {
-    label: "Phase 2 Deployment",
+    label: "Scaling rollout",
     icon: Activity,
     color: "text-amber-900",
     bg: "bg-amber-50",
   },
   operational: {
-    label: "Operational",
+    label: "In production",
     icon: Activity,
     color: "text-emerald-800",
     bg: "bg-emerald-50",
   },
   framework: {
-    label: "Framework Established",
+    label: "Controls locked",
     icon: ShieldCheck,
     color: "text-primary",
     bg: "bg-accent",
   },
   rnd: {
-    label: "In R&D",
-    icon: FlaskConical,
+    label: "Architecture exploration",
+    icon: Network,
     color: "text-muted-foreground",
     bg: "bg-muted",
   },
@@ -198,19 +199,23 @@ export function StrategicWorkstreams() {
   return (
     <>
       <div className="bg-card border border-border rounded-xl overflow-hidden shadow-sm">
-        <div className="px-6 py-4 border-b border-border flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-accent">
-              <FlaskConical className="w-4 h-4 text-accent-foreground" />
+        <div className="px-6 py-4 border-b border-border flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="p-2 rounded-lg bg-accent shrink-0">
+              <Layers className="w-4 h-4 text-accent-foreground" />
             </div>
-            <div>
-              <h3 className="font-semibold text-card-foreground">Strategic Workstreams</h3>
-              <p className="text-xs text-muted-foreground">Platform lab · product leadership reality</p>
+            <div className="min-w-0">
+              <h3 className="font-semibold text-card-foreground leading-snug text-balance">
+                Production Frameworks: Architecting for Scale.
+              </h3>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Global systems · how maturity advances from lab to production surfaces
+              </p>
             </div>
           </div>
           <Link
             href="/lab"
-            className="text-sm text-primary hover:text-primary/80 flex items-center gap-1 transition-colors"
+            className="text-sm text-primary hover:text-primary/80 flex items-center gap-1 transition-colors shrink-0"
           >
             View lab
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -250,7 +255,10 @@ export function StrategicWorkstreams() {
                     <p className="text-xs text-muted-foreground leading-snug">{ws.description}</p>
                   </div>
 
-                  <div className="w-24 shrink-0 hidden sm:block">
+                  <div className="w-28 shrink-0 hidden sm:flex flex-col justify-center gap-1">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                      Maturity level
+                    </span>
                     <div className="h-1.5 bg-muted rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
@@ -266,17 +274,18 @@ export function StrategicWorkstreams() {
                         )}
                       />
                     </div>
+                    <span className="text-[10px] tabular-nums text-muted-foreground">{ws.progress}%</span>
                   </div>
 
                   <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                 </Link>
 
-                <div className="flex items-center justify-end gap-2 px-6 pb-4 sm:pb-0 sm:flex-col sm:justify-center sm:border-l sm:border-border sm:bg-muted/20 sm:px-4 sm:min-w-[148px]">
+                <div className="flex items-center justify-end gap-2 px-6 pb-4 sm:pb-0 sm:flex-col sm:justify-center sm:border-l sm:border-border sm:bg-muted/15 sm:px-4 sm:min-w-[148px]">
                   <Button
                     type="button"
                     variant="outline"
                     size="sm"
-                    className="text-xs gap-1.5 h-8"
+                    className="text-xs gap-1.5 h-8 border-border bg-transparent font-normal text-muted-foreground shadow-none hover:bg-muted/60 hover:text-foreground"
                     onClick={() => {
                       setActiveId(ws.id)
                       setOpen(true)

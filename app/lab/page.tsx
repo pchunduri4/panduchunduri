@@ -91,7 +91,7 @@ export default function LabPage() {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-foreground">Platform Lab</h1>
-                <p className="text-sm text-muted-foreground">Strategic workstreams in flight</p>
+                <p className="text-sm text-muted-foreground">Production frameworks in motion</p>
               </div>
             </div>
             <p className="text-muted-foreground max-w-2xl">

@@ -10,14 +10,13 @@ import {
   Brain,
   Search,
   FlaskConical,
-  Linkedin,
-  Mail,
   ChevronDown,
   ChevronRight,
   Menu,
   X,
   GraduationCap,
 } from "lucide-react"
+import { ContactDialog } from "@/components/contact-dialog"
 import { cn } from "@/lib/utils"
 
 const libraryItems = [
@@ -47,9 +46,6 @@ const libraryItems = [
   },
 ]
 
-import { SITE_CONTACT_EMAIL, SITE_LINKEDIN_URL } from "@/lib/site-contact"
-
-
 export function Sidebar() {
   const pathname = usePathname()
   const router = useRouter()
@@ -73,7 +69,6 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileOpen(!isMobileOpen)}
         className="fixed top-4 left-4 z-50 p-2 rounded-lg bg-background border border-border shadow-sm lg:hidden"
@@ -82,7 +77,6 @@ export function Sidebar() {
         {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
 
-      {/* Mobile Overlay */}
       {isMobileOpen && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -93,7 +87,6 @@ export function Sidebar() {
         />
       )}
 
-      {/* Sidebar */}
       <motion.aside
         initial={false}
         animate={{
@@ -105,12 +98,11 @@ export function Sidebar() {
           "lg:translate-x-0"
         )}
       >
-        {/* Profile Section — primary way back to home */}
         <Link
           href="/"
           onClick={handleHomeNavigation}
           aria-label="Home"
-          className="block p-6 border-b border-sidebar-border hover:bg-sidebar-accent/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+          className="block p-6 border-b border-sidebar-border hover:bg-sidebar-accent/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset shrink-0"
         >
           <div className="flex items-center gap-3 mb-3">
             <div className="w-12 h-12 rounded-full overflow-hidden bg-secondary flex items-center justify-center shrink-0 ring-1 ring-border">
@@ -135,40 +127,13 @@ export function Sidebar() {
           <p className="text-xs text-muted-foreground/90 leading-relaxed mt-2">
             Experience includes Walmart Global Tech, Avetta, Parsons, and Gartner.
           </p>
-          <p className="text-xs text-muted-foreground/90 leading-relaxed mt-2">
-            Wharton MBA
-          </p>
         </Link>
 
-        {/* Prominent contact — easy to spot on every page */}
-        <div className="px-4 py-4 border-b border-sidebar-border bg-primary/5">
-          <p className="text-[10px] font-bold uppercase tracking-wider text-primary mb-2">
-            Reach out
-          </p>
-          <a
-            href={`mailto:${SITE_CONTACT_EMAIL}`}
-            className="flex items-center justify-center gap-2 w-full rounded-lg border border-primary/35 bg-background px-3 py-2.5 text-sm font-semibold text-foreground shadow-sm hover:bg-primary/10 hover:border-primary/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <Mail className="w-4 h-4 shrink-0 text-primary" aria-hidden />
-            <span className="truncate">{SITE_CONTACT_EMAIL}</span>
-          </a>
-          <a
-            href={SITE_LINKEDIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 flex items-center justify-center gap-2 w-full rounded-lg border border-sidebar-border bg-muted/40 px-3 py-2 text-xs font-medium text-sidebar-foreground hover:bg-sidebar-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <Linkedin className="w-4 h-4 shrink-0 text-[#0A66C2]" aria-hidden />
-            LinkedIn profile
-          </a>
-        </div>
-
-        {/* Systems architecture */}
-        <div className="flex-1 overflow-y-auto py-4">
+        <div className="flex-1 overflow-y-auto min-h-0 py-4">
           <div className="px-4 mb-2">
             <button
               onClick={() => setIsLibraryOpen(!isLibraryOpen)}
-              className="flex items-center gap-2 w-full text-xs font-medium text-muted-foreground uppercase tracking-wider hover:text-foreground transition-colors"
+              className="flex items-center gap-2 w-full text-xs font-semibold text-foreground uppercase tracking-wider hover:text-primary transition-colors"
             >
               {isLibraryOpen ? (
                 <ChevronDown className="w-3.5 h-3.5" />
@@ -213,9 +178,7 @@ export function Sidebar() {
                       >
                         {item.title}
                       </span>
-                      <p className="text-xs text-muted-foreground mt-0.5">
-                        {item.description}
-                      </p>
+                      <p className="text-xs text-muted-foreground mt-0.5">{item.description}</p>
                     </div>
                   </Link>
                 </li>
@@ -223,10 +186,9 @@ export function Sidebar() {
             </ul>
           </motion.nav>
 
-          {/* Quick Links */}
           <div className="px-4 mt-6 mb-2">
-            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              Quick Access
+            <span className="text-xs font-semibold text-foreground uppercase tracking-wider">
+              Strategic Dispatch
             </span>
           </div>
           <ul className="px-2 space-y-1">
@@ -254,13 +216,27 @@ export function Sidebar() {
                     navIsActive("/") && "text-foreground font-semibold"
                   )}
                 >
-                  Strategic Dispatch
+                  Dashboard & field notes
                 </span>
               </Link>
             </li>
           </ul>
         </div>
 
+        <div className="shrink-0 border-t border-sidebar-border bg-sidebar/80">
+          <div className="px-4 py-3">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+              Connect
+            </p>
+            <ContactDialog variant="sidebar" />
+          </div>
+          <div className="px-4 py-3 border-t border-sidebar-border">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">
+              Credentials
+            </p>
+            <p className="text-xs text-muted-foreground leading-relaxed">Wharton MBA</p>
+          </div>
+        </div>
       </motion.aside>
     </>
   )

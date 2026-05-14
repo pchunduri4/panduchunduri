@@ -17,16 +17,16 @@ export const DISPATCH_COLUMN_LABELS: Record<
   { title: string; subtitle: string }
 > = {
   retail: {
-    title: "Retail & Commerce",
-    subtitle: "Agentic commerce, catalog truth, and intent-led journeys.",
+    title: "Agentic Commerce",
+    subtitle: "Catalog truth, intent-led journeys, and agentic retail systems.",
   },
   systems: {
-    title: "Systems & Logic",
-    subtitle: "AEO/GEO, tokens, fidelity, and platform architecture.",
+    title: "AEO & Logic",
+    subtitle: "GEO/AEO, tokens, fidelity gates, and platform architecture.",
   },
   market: {
-    title: "Market & Strategy",
-    subtitle: "Positioning, ROI, org design, and durable moats.",
+    title: "Strategic Leadership",
+    subtitle: "Positioning, ROI, org design, and durable enterprise moats.",
   },
 }
 
