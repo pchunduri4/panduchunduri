@@ -1,23 +1,63 @@
 "use client"
 
 import { StrategyTemplate } from "@/components/strategy-template"
+import { AIEvolutionDiagram } from "@/components/ai-evolution-diagram"
+
+function KeyTechStack({ items }: { items: string[] }) {
+  return (
+    <div className="not-prose mt-6 border-t border-dashed border-border pt-5 flex flex-wrap items-center gap-2">
+      <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+        Key tech stack
+      </span>
+      {items.map((t) => (
+        <span
+          key={t}
+          className="text-xs px-2.5 py-1 rounded-md bg-secondary text-secondary-foreground border border-border font-medium"
+        >
+          {t}
+        </span>
+      ))}
+    </div>
+  )
+}
 
 const tableOfContents = [
   { id: "introduction", title: "Introduction", level: 2 },
-  { id: "gartner-era", title: "The Gartner Era: Data Analytics Foundation", level: 2 },
-  { id: "parsons-transformation", title: "Parsons: From Analytics to AI Products", level: 2 },
-  { id: "startup-lessons", title: "Startup Lessons: Teep & Smart Home AI", level: 3 },
-  { id: "avetta-scale", title: "Avetta: AI Platform Incubation", level: 2 },
-  { id: "enterprise-retail-genai", title: "Enterprise retail: GenAI at scale", level: 2 },
-  { id: "implications", title: "Strategic Implications", level: 2 },
+  { id: "evolution-diagram", title: "Evolution thesis", level: 2 },
+  {
+    id: "phase-foundation",
+    title: "Strategic Phase I — Insight infrastructure at research scale",
+    level: 2,
+  },
+  {
+    id: "phase-predictive-scale",
+    title: "Strategic Phase II — Predictive velocity & connected portfolios",
+    level: 2,
+  },
+  {
+    id: "phase-greenfield-trust",
+    title: "Strategic Phase III — Greenfield AI & trust under constraint",
+    level: 2,
+  },
+  {
+    id: "phase-marketplace-platform",
+    title: "Strategic Phase IV — Marketplace risk & platform economics",
+    level: 2,
+  },
+  {
+    id: "phase-agentic-hyperscale",
+    title: "Strategic Phase V — GenAI & agentic surfaces at hyperscale",
+    level: 2,
+  },
+  { id: "implications", title: "Strategic implications", level: 2 },
   { id: "conclusion", title: "Conclusion", level: 2 },
 ]
 
 export default function AIEvolutionPage() {
   return (
     <StrategyTemplate
-      title="Product AI Strategy: From Analytics to Enterprise AI Platforms"
-      description="The evolution from business intelligence and data analytics to AI-first product development. Lessons from 23+ years leading product at Gartner, Parsons, Avetta, and enterprise retail GenAI at global scale."
+      title="The AI Evolution: A Playbook for Architecting Global-Scale Systems."
+      description="How to scale systems from analytics foundations to agentic experiences—without mistaking models for strategy. Patterns from research-scale data platforms, predictive portfolios, marketplace AI, and governed GenAI at global retail scale."
       readTime="20 min"
       publishDate="2024"
       category="Strategic Thesis"
@@ -26,119 +66,289 @@ export default function AIEvolutionPage() {
       <section id="introduction" className="mb-12">
         <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
         <p className="mb-4">
-          Over 23 years in product management, I've witnessed and led the transformation from traditional business intelligence to modern AI-first product development. This thesis documents the strategic patterns that enable successful AI product evolution at enterprise scale.
+          The hardest product work in AI is not picking a model—it is scaling systems that move
+          cleanly from <strong>analytics</strong> (what happened, what is trending) to{" "}
+          <strong>agents</strong> (what should happen next, with accountability). That transition
+          breaks teams when data discipline, economics, and governance are treated as late-stage
+          add-ons instead of architectural prerequisites.
+        </p>
+        <p className="mb-4">
+          This playbook frames the evolution as a sequence of compounding phases: monetizing
+          insight infrastructure, shipping predictive and connected products under real P&L
+          pressure, incubating AI inside multi-sided platforms, and only then pushing{" "}
+          <strong>grounded, agentic surfaces</strong> where factual fidelity and kill-switches are
+          part of the product spec—not a post-launch audit.
         </p>
         <p>
-          The journey from Gartner's research platforms through Parsons' predictive systems, a smart home startup, Avetta's marketplace AI, and now enterprise GenAI infrastructure at global retail scale reveals a consistent pattern: <strong>successful AI product strategy isn't about technology adoption—it's about bridging AI hype with measurable business value.</strong>
+          What follows is written for product and platform leaders who own outcomes, not slide
+          decks: the business challenge at each phase, the technical bar that had to clear, and the
+          implications for how you staff, fund, and sequence work on the way to global scale.
         </p>
       </section>
 
-      <section id="gartner-era" className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4">The Gartner Era: Data Analytics Foundation (2007-2013)</h2>
+      <section id="evolution-diagram" className="mb-12">
+        <AIEvolutionDiagram />
+      </section>
+
+      <section id="phase-foundation" className="mb-12">
+        <h2 className="text-2xl font-semibold mb-4">
+          Strategic Phase I — Insight infrastructure at research scale
+        </h2>
         <p className="mb-4">
-          At Gartner, I launched the Master Research product platform—a system that enabled Salesforce lead generation and one-click search across 10+ years of archived data. This project eliminated $2M+ in annual manual labor costs and established foundational patterns I'd use throughout my career:
+          <strong>Business challenge:</strong> Turn massive archival depth from a storage cost into
+          a revenue-grade discovery surface—without drowning buyers in noise.
+        </p>
+        <p className="mb-4">
+          <strong>Technical challenge:</strong> Unify search, entitlement, and CRM-adjacent
+          workflows so analysts and clients could trust “one search” across years of heterogeneous
+          research—not a patchwork of siloed exports.
         </p>
         <ul className="list-disc pl-6 space-y-2 mb-4">
-          <li><strong>User-centric product management:</strong> Prioritized requirements through direct user insights, A/B testing, and qualitative research</li>
-          <li><strong>Data as product:</strong> Transformed archived research from cost center to revenue driver</li>
-          <li><strong>Platform thinking:</strong> Built infrastructure that served multiple use cases rather than point solutions</li>
+          <li>
+            <strong>Product spine:</strong> Requirements driven by observed workflows, not
+            feature parity lists—A/B learning loops where the product itself teaches you what
+            “good” looks like.
+          </li>
+          <li>
+            <strong>Data as product:</strong> Archival assets packaged as measurable pipeline
+            contributors (e.g., lead acceleration), not passive libraries.
+          </li>
+          <li>
+            <strong>Platform leverage:</strong> One ingestion and indexing spine serving multiple
+            revenue motions instead of one-off report factories.
+          </li>
         </ul>
         <p>
-          Managing 5 key client engagements for digital product development, including migrations that required direct management of 6 FTEs and 50+ indirect reports, taught me that <strong>AI product success depends more on change management than technical excellence.</strong>
+          The enduring lesson:{" "}
+          <strong>
+            adoption and change management dominate “model moments” when the buyer is an enterprise
+            team under quota pressure.
+          </strong>
         </p>
+        <KeyTechStack
+          items={[
+            "Enterprise search",
+            "Research archives",
+            "Salesforce integrations",
+            "A/B experimentation",
+            "Data warehousing",
+          ]}
+        />
       </section>
 
-      <section id="parsons-transformation" className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4">Parsons: From Analytics to AI Products (2013-2020)</h2>
+      <section id="phase-predictive-scale" className="mb-12">
+        <h2 className="text-2xl font-semibold mb-4">
+          {"Strategic Phase II — Predictive velocity & connected portfolios"}
+        </h2>
         <p className="mb-4">
-          At Parsons, I led product strategy that generated $1B+ in value through predictive capabilities. The transformation from traditional consulting to AI-enabled products required fundamental shifts in how we thought about product development:
+          <strong>Business challenge:</strong> Convert engineering-adjacent analytics into
+          product lines with defensible margins—while competing for roadmap against consulting
+          gravity.
+        </p>
+        <p className="mb-4">
+          <strong>Technical challenge:</strong> Operationalize forecasting and IoT-scale telemetry
+          so outcomes are tied to SLAs customers pay for—not bespoke science projects per account.
         </p>
         <ol className="list-decimal pl-6 space-y-3 mb-4">
           <li>
-            <strong>GTM Strategy for IoT:</strong> Launched new product lines driving $100M+ revenue with 25%+ EBITDA margins
+            <strong>Portfolio GTM:</strong> Launch connected offers where hardware, software, and
+            services reinforce the same narrative—not three P&L lines pretending to be one.
           </li>
           <li>
-            <strong>Product-Market Fit at Scale:</strong> Assessed 5 business cases for incubation alongside startups from US and Israel
+            <strong>Incubation discipline:</strong> Run parallel business cases with external
+            innovation ecosystems while keeping a single internal bar for “what ships.”
           </li>
           <li>
-            <strong>Global Team Building:</strong> Established high-performing organizations spanning North America, Europe, and APAC
+            <strong>Global execution:</strong> Build operating cadences across regions without
+            fragmenting the product architecture.
           </li>
         </ol>
         <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground my-6">
-          "The companies that win in AI will look less like model providers and more like domain-specific operating systems."
+          “The companies that win in AI will look less like model providers and more like
+          domain-specific operating systems.”
         </blockquote>
+        <KeyTechStack
+          items={[
+            "Predictive analytics",
+            "IoT mesh & telemetry",
+            "Smart mobility stacks",
+            "Portfolio P&L modeling",
+            "Global program management",
+          ]}
+        />
       </section>
 
-      <section id="startup-lessons" className="mb-12">
-        <h3 className="text-xl font-semibold mb-4">Startup Lessons: Teep & Smart Home AI (2019-2020)</h3>
+      <section id="phase-greenfield-trust" className="mb-12">
+        <h2 className="text-2xl font-semibold mb-4">
+          {"Strategic Phase III — Greenfield AI & trust under constraint"}
+        </h2>
         <p className="mb-4">
-          Founding Teep—a smart home products and software startup focused on data privacy, safety, and transparency—provided crucial lessons about AI product development in greenfield environments:
+          <strong>Business challenge:</strong> Differentiate in consumer smart-home without
+          defaulting to the surveillance playbook—especially when capital and time are scarce.
+        </p>
+        <p className="mb-4">
+          <strong>Technical challenge:</strong> Prove value with thin teams while keeping privacy,
+          safety, and transparency legible to non-expert buyers.
         </p>
         <ul className="list-disc pl-6 space-y-2">
-          <li>Built a competent team from scratch, handling all aspects from market research to operations</li>
-          <li>Learned that AI differentiation requires unique data access, not just better algorithms</li>
-          <li>Discovered the importance of trust and transparency in consumer AI products</li>
+          <li>
+            <strong>Moat realism:</strong> Differentiation comes from durable data rights and
+            experiences—not a slightly better offline model score.
+          </li>
+          <li>
+            <strong>Trust UX:</strong> Progressive disclosure beats “trust us” copy when sensors
+            are in someone’s living room.
+          </li>
+          <li>
+            <strong>Operating tempo:</strong> Startup speed only helps if you instrument churn,
+            incidents, and support load early enough to steer.
+          </li>
         </ul>
+        <KeyTechStack
+          items={[
+            "Consumer IoT",
+            "Privacy-by-design UX",
+            "Telemetry minimization",
+            "Incident response",
+            "Rapid prototyping",
+          ]}
+        />
       </section>
 
-      <section id="avetta-scale" className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4">Avetta: AI Platform Incubation (2020-2022)</h2>
+      <section id="phase-marketplace-platform" className="mb-12">
+        <h2 className="text-2xl font-semibold mb-4">
+          {"Strategic Phase IV — Marketplace risk & platform economics"}
+        </h2>
         <p className="mb-4">
-          As Head of Product for Avetta's AI and Analytics division, I led new product incubation for marketplace and platform AI products. This role bridged the gap between startup agility and enterprise requirements:
+          <strong>Business challenge:</strong> Incubate AI inside a marketplace where trust,
+          compliance, and throughput are the product—growth cannot outrun risk controls.
+        </p>
+        <p className="mb-4">
+          <strong>Technical challenge:</strong> Ship recommendations and risk automation that are
+          auditable to enterprise buyers and tolerable to suppliers on the other side of the
+          network.
         </p>
         <ul className="list-disc pl-6 space-y-2">
-          <li>Supply chain risk management through AI-powered compliance monitoring</li>
-          <li>Marketplace optimization using predictive analytics and recommendation systems</li>
-          <li>Platform AI products serving $100M+ revenue business with 18%+ YoY growth</li>
+          <li>
+            <strong>Compliance as throughput:</strong> Monitoring signals have to reduce operational
+            drag, not add opaque black boxes.
+          </li>
+          <li>
+            <strong>Two-sided optimization:</strong> Models that improve buyer experience while
+            preserving supplier viability—otherwise the marketplace hollows out.
+          </li>
+          <li>
+            <strong>Platform economics:</strong> AI features must show up in retention, take rate,
+            or unit economics—not only in innovation slide counts.
+          </li>
         </ul>
+        <KeyTechStack
+          items={[
+            "Marketplace ML",
+            "Supply chain risk scoring",
+            "Compliance automation",
+            "Recommendation systems",
+            "Predictive analytics",
+          ]}
+        />
       </section>
 
-      <section id="enterprise-retail-genai" className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4">Enterprise retail: GenAI at scale (2022–Present)</h2>
+      <section id="phase-agentic-hyperscale" className="mb-12">
+        <h2 className="text-2xl font-semibold mb-4">
+          {"Strategic Phase V — GenAI & agentic surfaces at hyperscale"}
+        </h2>
         <p className="mb-4">
-          In my current chapter I scale GenAI and LLM platforms to $B+ impact at a top global retailer. The real challenge isn't technology—it's bridging AI hype with business value. Key insights from this experience:
+          <strong>Business challenge:</strong> Convert GenAI from a capability demo into measured
+          business impact at catalog and traffic volumes where a single defect class can become a
+          headline.
         </p>
-        <ol className="list-decimal pl-6 space-y-3">
+        <p className="mb-4">
+          <strong>Technical challenge:</strong> Operate grounded assistants with routing, cost
+          controls, evaluation harnesses, and explicit abstention paths—while keeping latency and
+          reliability inside customer-tolerable envelopes.
+        </p>
+        <ol className="list-decimal pl-6 space-y-3 mb-4">
           <li>
-            <strong>Business-driven AI strategy:</strong> Every AI investment must tie to measurable business outcomes
+            <strong>Outcome-linked AI strategy:</strong> Every major bet ties to a business metric
+            the CFO recognizes—not “engagement with the bot.”
           </li>
           <li>
-            <strong>Responsible AI trade-offs:</strong> Practical frameworks for balancing capability vs. risk
+            <strong>Responsible trade-offs:</strong> Capability, latency, and harm surface are
+            negotiated in the PRD, not discovered in production.
           </li>
           <li>
-            <strong>Platform scalability:</strong> Building infrastructure that serves a global multi-country retail operation at extreme catalog scale
+            <strong>Hyperscale architecture:</strong> Multi-country operations and extreme catalog
+            cardinality force platform thinking: reuse, gates, and observability first.
           </li>
         </ol>
         <p className="mt-4">
-          The Google Cloud Generative AI Leader certification reinforced these principles—focusing on scalable, outcome-focused AI products built with Gemini and Vertex AI.
+          Cloud GenAI certification work reinforced the same product lesson:{" "}
+          <strong>
+            the durable edge is operational excellence—routing, fallbacks, and governance—not a
+            leaderboard score.
+          </strong>
         </p>
+        <KeyTechStack
+          items={["Vertex AI", "Gemini", "LLM orchestration", "RAG & grounding", "Enterprise SLOs"]}
+        />
       </section>
 
       <section id="implications" className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4">Strategic Implications</h2>
-        <p className="mb-4">
-          For AI product leaders, this 23-year journey suggests several actionable implications:
+        <h2 className="text-2xl font-semibold mb-4">Strategic implications</h2>
+        <p className="mb-6 text-muted-foreground">
+          Tactical takeaways for leaders shipping under real scrutiny—high stakes, few second
+          chances.
         </p>
-        <ol className="list-decimal pl-6 space-y-3">
-          <li>
-            <strong>Start with business value, not technology.</strong> The most successful AI products solve clear business problems first.
-          </li>
-          <li>
-            <strong>Build data moats early.</strong> Unique data access creates sustainable competitive advantage.
-          </li>
-          <li>
-            <strong>Invest in change management.</strong> AI adoption fails more often from organizational resistance than technical limitations.
-          </li>
-          <li>
-            <strong>Think platforms, not features.</strong> AI infrastructure that serves multiple use cases compounds value over time.
-          </li>
-        </ol>
+        <div className="not-prose space-y-4">
+          <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
+            <p className="font-bold text-foreground">ROI-First Architecture</p>
+            <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+              If the business case does not survive a finance review, you are building research,
+              not product. Sequence investments so each layer funds the next.
+            </p>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
+            <p className="font-bold text-foreground">Governed Agent Rollouts</p>
+            <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+              Agents amplify catalog defects and policy ambiguity. Ship gates, evidence trails, and
+              kill switches as part of v1—not “Phase 2 hardening.”
+            </p>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
+            <p className="font-bold text-foreground">Platform Compounding</p>
+            <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+              Features that do not reuse data contracts, evaluation harnesses, and routing
+              primitives become expensive one-offs that starve the roadmap.
+            </p>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
+            <p className="font-bold text-foreground">Change Velocity as Moat</p>
+            <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+              Organizational resistance kills more AI programs than tokenizer limits. Staff
+              enablement like a product surface—with metrics.
+            </p>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
+            <p className="font-bold text-foreground">Data Rights Before Model Rights</p>
+            <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+              If you cannot explain provenance and policy boundaries, you do not have enterprise
+              AI—you have a demo with liability.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section id="conclusion" className="mb-12">
         <h2 className="text-2xl font-semibold mb-4">Conclusion</h2>
         <p>
-          The evolution from analytics to AI-first product development follows predictable patterns. Success requires combining deep technical understanding with business acumen, building platforms that scale, and maintaining relentless focus on measurable outcomes. As we enter the agentic AI era, these principles become even more critical—the winners will be those who bridge AI capabilities with real business value.
+          Scaling from analytics to agents is not a hype cycle—it is an architectural progression.
+          The teams that win treat each phase as a forcing function: monetizable insight
+          infrastructure, predictive products with P&L discipline, marketplace-safe automation,
+          and only then agentic surfaces with grounded behavior and operational guardrails. In the
+          agentic era,{" "}
+          <strong>
+            the differentiator is whether your systems compound—or whether your demos decay.
+          </strong>
         </p>
       </section>
     </StrategyTemplate>

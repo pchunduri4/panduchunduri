@@ -7,8 +7,9 @@ import Link from "next/link"
 
 const theses = [
   {
-    title: "Product AI Strategy: From Analytics to Enterprise AI Platforms",
-    thesis: "The evolution from business intelligence and data analytics to AI-first product development. Lessons from leading product at Gartner, Parsons, Avetta, and global-scale enterprise retail.",
+    title: "The AI Evolution: A Playbook for Architecting Global-Scale Systems",
+    thesis:
+      "Scaling systems from analytics foundations to grounded agents—architecture, economics, and governance as one spine.",
     readTime: "20 min",
     href: "/strategy/ai-evolution",
   },

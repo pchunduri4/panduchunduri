@@ -24,7 +24,7 @@ const searchResults = [
   {
     category: "The Calculus",
     items: [
-      { title: "From Zero-to-One: Scaling Intelligent Systems", href: "/strategy/ai-evolution" },
+      { title: "The AI Evolution: A Playbook for Global-Scale Systems", href: "/strategy/ai-evolution" },
       { title: "Smart Mobility & IoT: $100M+ Product Lines", href: "/strategy/smart-mobility" },
       { title: "AI Platform Economics: Asymmetric ROI", href: "/strategy/platform-economics" },
     ],

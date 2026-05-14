@@ -19,9 +19,9 @@ const pillarTheses = [
     href: "/ai-systems/walmart-scale",
   },
   {
-    title: "From Zero-to-One to One-to-Infinity",
+    title: "The AI Evolution: A Playbook for Global-Scale Systems",
     thesis:
-      "Scaling through the chaos phase: production ML platforms, global retail load, and technical debt you can actually service.",
+      "Scaling systems from analytics foundations to grounded agents—architecture, economics, and governance as one spine.",
     readTime: "20 min",
     category: "Scaling & Platform Strategy (The Calculus)",
     icon: GraduationCap,
