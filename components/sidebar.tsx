@@ -11,7 +11,6 @@ import {
   Search,
   FlaskConical,
   Linkedin,
-  Github,
   Mail,
   ChevronDown,
   ChevronRight,
@@ -48,11 +47,8 @@ const libraryItems = [
   },
 ]
 
-const socialLinks = [
-  { icon: Linkedin, href: "https://www.linkedin.com/in/panduchunduri/", label: "LinkedIn" },
-  { icon: Github, href: "https://github.com/pchunduri4/panduchunduri", label: "GitHub" },
-  { icon: Mail, href: "mailto:pandu@panduchunduri.com", label: "Email" },
-]
+import { SITE_CONTACT_EMAIL, SITE_LINKEDIN_URL } from "@/lib/site-contact"
+
 
 export function Sidebar() {
   const pathname = usePathname()
@@ -143,6 +139,29 @@ export function Sidebar() {
             Wharton MBA
           </p>
         </Link>
+
+        {/* Prominent contact — easy to spot on every page */}
+        <div className="px-4 py-4 border-b border-sidebar-border bg-primary/5">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-primary mb-2">
+            Reach out
+          </p>
+          <a
+            href={`mailto:${SITE_CONTACT_EMAIL}`}
+            className="flex items-center justify-center gap-2 w-full rounded-lg border border-primary/35 bg-background px-3 py-2.5 text-sm font-semibold text-foreground shadow-sm hover:bg-primary/10 hover:border-primary/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <Mail className="w-4 h-4 shrink-0 text-primary" aria-hidden />
+            <span className="truncate">{SITE_CONTACT_EMAIL}</span>
+          </a>
+          <a
+            href={SITE_LINKEDIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 flex items-center justify-center gap-2 w-full rounded-lg border border-sidebar-border bg-muted/40 px-3 py-2 text-xs font-medium text-sidebar-foreground hover:bg-sidebar-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <Linkedin className="w-4 h-4 shrink-0 text-[#0A66C2]" aria-hidden />
+            LinkedIn profile
+          </a>
+        </div>
 
         {/* Systems architecture */}
         <div className="flex-1 overflow-y-auto py-4">
@@ -242,23 +261,6 @@ export function Sidebar() {
           </ul>
         </div>
 
-        {/* Contact Section */}
-        <div className="p-4 border-t border-sidebar-border">
-          <div className="flex items-center justify-center gap-4">
-            {socialLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg hover:bg-sidebar-accent transition-colors group"
-                aria-label={link.label}
-              >
-                <link.icon className="w-5 h-5 text-muted-foreground group-hover:text-sidebar-accent-foreground transition-colors" />
-              </a>
-            ))}
-          </div>
-        </div>
       </motion.aside>
     </>
   )

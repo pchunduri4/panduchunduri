@@ -16,7 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const s = getDispatchBySlug(slug)
   if (!s) return { title: "Dispatch" }
-  const desc = `${s.theMove.slice(0, 140)}…`
+  const desc =
+    s.expertAnswer.length > 155 ? `${s.expertAnswer.slice(0, 152).trim()}…` : s.expertAnswer
   return {
     title: `${s.title} | Strategic Dispatch`,
     description: desc,

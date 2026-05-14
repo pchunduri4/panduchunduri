@@ -1,8 +1,7 @@
 "use client"
 
 import { useState, useCallback, useEffect } from "react"
-import { motion } from "framer-motion"
-import { FileText, ChevronRight } from "lucide-react"
+import { ListTree, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import {
   Sheet,
@@ -12,12 +11,19 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 import { DispatchExecutiveSnapshot } from "@/components/dispatch-executive-snapshot"
-import { DISPATCH_SNAPSHOTS, getDispatchBySlug, type DispatchSnapshot } from "@/lib/dispatch-snapshots"
+import {
+  DISPATCH_COLUMN_ORDER,
+  DISPATCH_COLUMN_LABELS,
+  getDispatchBySlug,
+  getSnapshotsByColumn,
+  type DispatchSnapshot,
+} from "@/lib/dispatch-snapshots"
 import { cn } from "@/lib/utils"
 
 export function StrategicDispatch() {
   const [open, setOpen] = useState(false)
   const [activeSlug, setActiveSlug] = useState<string | null>(null)
+  const [lastUpdate, setLastUpdate] = useState("")
 
   const active = activeSlug ? getDispatchBySlug(activeSlug) : undefined
 
@@ -40,61 +46,101 @@ export function StrategicDispatch() {
     return () => window.removeEventListener("dashboard-reset", onReset)
   }, [])
 
+  useEffect(() => {
+    setLastUpdate(
+      new Date().toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    )
+  }, [])
+
   return (
     <>
       <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
         <div className="px-4 py-3 border-b border-border bg-muted/30 sm:px-5">
-          <div className="flex items-center justify-between gap-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Micro-insights
-            </span>
-            <span className="text-[11px] font-medium text-muted-foreground">Field notes</span>
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Strategic dispatch
+              </span>
+              <p className="text-[11px] text-muted-foreground mt-0.5">
+                High-density field notes · 30 intelligence streams
+              </p>
+            </div>
+            <span className="text-[11px] font-medium text-muted-foreground">Executive snapshots</span>
           </div>
-          <p className="text-xs text-muted-foreground mt-2">
-            Click a row for an executive snapshot—stay on the dashboard, or use the shareable link.
+          <p className="text-xs text-muted-foreground mt-2 max-w-4xl">
+            Click any title for the slide-over snapshot. Each topic has a shareable{" "}
+            <span className="font-mono text-foreground/80">/dispatch/…</span> URL for outbound and crawlers.
           </p>
         </div>
-        <ul className="divide-y divide-border">
-          {DISPATCH_SNAPSHOTS.map((item: DispatchSnapshot, index) => (
-            <motion.li
-              key={item.slug}
-              initial={{ opacity: 0, x: -6 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.03 }}
-            >
-              <button
-                type="button"
-                onClick={() => openSnapshot(item.slug)}
-                className={cn(
-                  "group flex w-full items-start gap-3 px-4 py-3.5 text-left sm:px-5 sm:py-3",
-                  "hover:bg-muted/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
-                )}
-              >
-                <div className="mt-0.5 rounded-md bg-accent p-1.5 shrink-0">
-                  <FileText className="size-3.5 text-accent-foreground" aria-hidden />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm text-foreground leading-snug group-hover:text-primary transition-colors">
-                    {item.title}
-                  </p>
-                  <p className="mt-1 text-[11px] text-muted-foreground">
-                    <Link
-                      href={`/dispatch/${item.slug}`}
-                      className="font-mono text-primary/90 hover:underline"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      /dispatch/{item.slug}
-                    </Link>
+
+        <div className="grid grid-cols-1 border-b border-border lg:grid-cols-3 lg:divide-x lg:divide-border">
+          {DISPATCH_COLUMN_ORDER.map((col) => {
+            const meta = DISPATCH_COLUMN_LABELS[col]
+            const rows = getSnapshotsByColumn(col)
+
+            return (
+              <div key={col} className="flex flex-col min-w-0 border-b border-border lg:border-b-0 last:border-b-0">
+                <div className="sticky top-0 z-10 bg-muted/50 px-3 py-2.5 border-b border-border backdrop-blur-sm">
+                  <h3 className="text-xs font-bold uppercase tracking-wide text-foreground leading-tight">
+                    {meta.title}
+                  </h3>
+                  <p className="text-[10px] text-muted-foreground leading-snug mt-0.5 line-clamp-2">
+                    {meta.subtitle}
                   </p>
                 </div>
-                <ChevronRight
-                  className="size-4 text-muted-foreground shrink-0 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
-                  aria-hidden
-                />
-              </button>
-            </motion.li>
-          ))}
-        </ul>
+                <ul className="flex flex-col">
+                  {rows.map((item: DispatchSnapshot) => (
+                    <li key={item.slug} className="border-b border-border last:border-b-0">
+                      <button
+                        type="button"
+                        onClick={() => openSnapshot(item.slug)}
+                        className={cn(
+                          "group flex w-full items-start gap-2 px-2.5 py-2 text-left",
+                          "hover:bg-muted/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+                        )}
+                      >
+                        <span className="mt-0.5 shrink-0 rounded border border-primary/25 bg-accent/80 p-1 text-primary">
+                          <ListTree className="size-3" aria-hidden />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-[11px] sm:text-xs leading-snug text-foreground group-hover:text-primary transition-colors line-clamp-3">
+                            {item.title}
+                          </span>
+                          <Link
+                            href={`/dispatch/${item.slug}`}
+                            className="mt-0.5 block font-mono text-[9px] text-primary/80 hover:underline truncate"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            /{item.slug}
+                          </Link>
+                        </span>
+                        <ChevronRight
+                          className="size-3.5 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity mt-0.5"
+                          aria-hidden
+                        />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          })}
+        </div>
+
+        <div className="flex flex-col gap-1 px-4 py-3 sm:px-5 bg-muted/20 border-t border-border text-[10px] sm:text-[11px] text-muted-foreground">
+          <p>
+            <span className="font-medium text-foreground/90">Intelligence stream</span> active since 2023 ·
+            Thinking consistent across the Project Infinity development cycle.
+          </p>
+          <p>
+            <span className="font-medium text-foreground/90">Last update:</span>{" "}
+            {lastUpdate || "…"}
+          </p>
+        </div>
       </div>
 
       <Sheet open={open} onOpenChange={onOpenChange}>

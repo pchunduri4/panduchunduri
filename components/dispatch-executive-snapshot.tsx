@@ -20,6 +20,9 @@ export function DispatchExecutiveSnapshot({
 
   return (
     <article className={cn("flex flex-col", className)}>
+      <p className="sr-only" data-expert-answer="true">
+        {snapshot.expertAnswer}
+      </p>
       <header className="border-b border-border pb-4 mb-6">
         <p className="text-[11px] font-bold uppercase tracking-wider text-primary mb-2">
           Executive snapshot

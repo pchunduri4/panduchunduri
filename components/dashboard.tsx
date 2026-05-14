@@ -1,11 +1,12 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { GraduationCap, Brain, Search, Sparkles } from "lucide-react"
+import { GraduationCap, Brain, Search, Sparkles, Mail, Linkedin } from "lucide-react"
 import { InsightCard } from "./insight-card"
 import { StrategicWorkstreams } from "./strategic-workstreams"
 import { CommandSearch } from "./command-search"
 import { StrategicDispatch } from "./strategic-dispatch"
+import { SITE_CONTACT_EMAIL, SITE_LINKEDIN_URL } from "@/lib/site-contact"
 
 /** Three pillar theses — concise one-liners; full depth lives on each route. */
 const pillarTheses = [
@@ -61,8 +62,28 @@ export function Dashboard() {
   return (
     <div className="flex-1 min-h-screen bg-background">
       <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="px-6 py-4">
-          <CommandSearch />
+        <div className="px-6 py-4 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
+          <div className="min-w-0 flex-1 max-w-2xl">
+            <CommandSearch />
+          </div>
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 shrink-0">
+            <a
+              href={`mailto:${SITE_CONTACT_EMAIL}`}
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-primary/40 bg-primary/8 px-4 py-2.5 text-sm font-semibold text-foreground hover:bg-primary/12 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <Mail className="size-4 shrink-0 text-primary" aria-hidden />
+              <span className="truncate">{SITE_CONTACT_EMAIL}</span>
+            </a>
+            <a
+              href={SITE_LINKEDIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm font-medium text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <Linkedin className="size-4 shrink-0 text-[#0A66C2]" aria-hidden />
+              LinkedIn
+            </a>
+          </div>
         </div>
       </header>
 
@@ -116,11 +137,11 @@ export function Dashboard() {
           <div className="mb-4">
             <h2 className="text-lg font-semibold text-foreground">Strategic Dispatch</h2>
             <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
-              Ten field notes with shareable URLs—open the slide-over from here, or send a{" "}
+              Thirty intelligence streams in three columns—click any row for the slide-over, or share a{" "}
               <span className="font-mono text-foreground/80">/dispatch/…</span> link directly.
             </p>
           </div>
-          <div className="max-w-3xl">
+          <div className="max-w-6xl">
             <StrategicDispatch />
           </div>
         </section>
