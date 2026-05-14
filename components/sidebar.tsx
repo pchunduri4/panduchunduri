@@ -137,6 +137,10 @@ export function Sidebar() {
           <p className="text-xs text-muted-foreground/90 leading-relaxed mt-2">
             Experience includes Walmart Global Tech, Avetta, Parsons, and Gartner.
           </p>
+          <p className="text-xs text-muted-foreground/90 leading-relaxed mt-2">
+            <span className="font-medium text-foreground">Wharton MBA</span>
+            <span className="text-muted-foreground">, The Wharton School.</span>
+          </p>
         </Link>
 
         {/* Systems architecture */}
