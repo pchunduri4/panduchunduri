@@ -8,9 +8,9 @@ export type SupplementaryProject = Omit<
 
 export const labProjects: Record<string, SupplementaryProject> = {
   "agentic-commerce": {
-    title: "Agentic Commerce: AI Agent Product Discovery",
+    title: "Agentic Catalog Orchestration",
     tagline:
-      "How autonomous agents discover, compare, and recommend products—and what catalog teams must optimize for machine decisions.",
+      "Token-aware RAG and stateful orchestration across 10M+ SKUs—how catalog planes, memory, and budgets keep agent answers grounded.",
     status: "live",
     problem:
       "Traditional PDPs assume a human scrolls, reads, and compares. Agentic workflows collapse that path: agents need structured eligibility signals, compatibility truth, and citation-grade facts. Ambiguous data causes agents to deprioritize or skip offers entirely.",
@@ -31,52 +31,52 @@ export const labProjects: Record<string, SupplementaryProject> = {
       { category: "Governance", items: ["Source-of-truth tags", "Change audit", "Responsible AI review"] },
     ],
   },
-  "cdq-scoring": {
-    title: "CDQ Scoring System",
+  "catalog-fidelity-index": {
+    title: "Catalog Fidelity Index (CFI)",
     tagline:
-      "Catalog Data Quality scoring to measure readiness for AI consumption—without inventing claims to fill gaps.",
+      "A proprietary composite for factual grounding and semantic relevance in multi-modal LLM outputs—built for release gates, not vanity dashboards.",
     status: "live",
     problem:
-      "Most catalog quality metrics optimize for merchandising throughput, not agent eligibility. Teams lack a shared score that predicts whether an item can be safely recommended by an autonomous agent under strict liability constraints.",
+      "Merchandising-grade quality scores do not predict whether an autonomous agent can safely cite a SKU. Teams need a defensible index that decomposes into explainable drivers auditors and merchants can act on.",
     architecture:
-      "CDQ combines coverage (required attributes present), fidelity (aligned with supplier and policy sources), consistency (cross-field logic), and freshness (staleness vs. seasonal truth). Scores roll up from SKU to category with explainable sub-drivers so owners know what to fix first.",
+      "CFI blends corroboration-aligned fidelity, semantic relevance to intent classes, coverage and freshness, and explicit conflict detection across supplier feeds, golden records, and policy text. Thresholds vary by agent use-case severity.",
     outcome:
-      "Pilot correlation between CDQ uplift and reduced agent errors supports using CDQ as a release gate for agent-facing surfaces. The framework is iterated with legal and trust partners to keep thresholds defensible.",
+      "Operational as a gating signal for agent-eligible surfaces; regressions route to owners with driver-level explainability. Correlates with reduced hallucination incidents in pilot evaluations.",
     metrics: [
-      { label: "Attribute coverage", value: "91%", change: "Pilot categories", isPositive: true },
-      { label: "Error reduction", value: "34%", change: "Agent factual errors", isPositive: true },
-      { label: "Fidelity checks", value: "12k", change: "Monthly sampled", isPositive: true },
-      { label: "Model confidence", value: "0.87", change: "Correlation (internal)", isPositive: true },
+      { label: "Pilot coverage", value: "91%", change: "Categories instrumented", isPositive: true },
+      { label: "Hallucination delta", value: "-34%", change: "Sampled agent evals", isPositive: true },
+      { label: "Monthly checks", value: "12k+", change: "Fidelity samples", isPositive: true },
+      { label: "Correlation", value: "0.87", change: "Internal gate model", isPositive: true },
     ],
     techStack: [
-      { category: "Quality rules", items: ["Declarative validators", "Cross-field checks", "Policy packs"] },
-      { category: "ML assist", items: ["Weak supervision", "Duplicate detection", "Language normalization"] },
-      { category: "Ops", items: ["Scorecards", "Owner routing", "SLA tracking"] },
-      { category: "Safety", items: ["Human escalation", "Rollback", "Audit trails"] },
+      { category: "Signals", items: ["Multi-modal evidence", "Policy packs", "Golden records"] },
+      { category: "Scoring", items: ["Weighted composite", "Driver exports", "Versioned weights"] },
+      { category: "Ops", items: ["Scorecards", "Owner queues", "SLA tracking"] },
+      { category: "Safety", items: ["Hold paths", "Rollback", "Audit trails"] },
     ],
   },
-  "angel-investing": {
-    title: "Wharton Angel Due Diligence Framework",
+  "multimodal-ingestion": {
+    title: "Multi-Modal Ingestion Engine",
     tagline:
-      "A repeatable lens for evaluating AI startups: market pull, moat, execution risk, and responsible deployment.",
-    status: "completed",
+      "From unstructured catalog artifacts to decision-grade structured data agents can trust—without inventing facts at ingest.",
+    status: "in-progress",
     problem:
-      "Angel investing in AI moves faster than traditional enterprise procurement, yet the failure modes are the same—thin moats, demoware, and unclear unit economics. The community needed a compact framework that scales across reviewers.",
+      "Suppliers ship PDFs, imagery, and conflicting tables; agents need a single canonical truth. Classic OCR-plus-LLM pipelines hallucinate under pressure unless ingestion is treated as a quality system, not a one-shot extract.",
     architecture:
-      "Scorecards across product, GTM, team, and responsible AI; red-flag triggers for data rights, model provenance, and customer concentration; standardized reference calls; and a memo template that forces explicit bear cases.",
+      "A staged pipeline: capture provenance, normalize representations, extract with confidence bounds, quarantine conflicts, and promote only validated fields into the agent-facing graph—with human review concentrated on liability-heavy attributes.",
     outcome:
-      "Applied across dozens of deals to align discussion and reduce blind spots. Completed deals inform pattern recognition for recurring risks in agentic commerce and vertical LLMs.",
+      "R&D track: reducing time-to-promote for high-value attributes while holding abstention rates flat. Designed to pair with CFI gates at the boundary to agent surfaces.",
     metrics: [
-      { label: "Deals reviewed", value: "32", change: "Framework applied", isPositive: true },
-      { label: "Time to memo", value: "48h", change: "Median first pass", isPositive: true },
-      { label: "Red flags caught", value: "14", change: "Pre-term-sheet", isPositive: true },
-      { label: "Follow-on rate", value: "22%", change: "Portfolio subset", isPositive: true },
+      { label: "Quarantine rate", value: "18%", change: "Pre-promote", isPositive: false },
+      { label: "Promote SLA", value: "36h", change: "Median path", isPositive: true },
+      { label: "Conflict detect", value: "+41%", change: "Vs. baseline ingest", isPositive: true },
+      { label: "R&D phase", value: "42%", change: "Readiness proxy", isPositive: true },
     ],
     techStack: [
-      { category: "Process", items: ["Scorecards", "Memo templates", "Reference scripts"] },
-      { category: "Research", items: ["Comp maps", "Tech due diligence", "Unit economics"] },
-      { category: "Community", items: ["Wharton Alumni Angels", "Expert calls", "Peer review"] },
-      { category: "Ethics", items: ["Responsible AI checklist", "Data rights", "Safety claims"] },
+      { category: "Ingest", items: ["OCR pipeline", "Layout models", "Provenance store"] },
+      { category: "Quality", items: ["Confidence scoring", "Quarantine queues", "Human review"] },
+      { category: "Graph", items: ["Canonical schema", "Merge rules", "Diff audit"] },
+      { category: "Agents", items: ["CFI handoff", "Abstention hooks", "Feature flags"] },
     ],
   },
   "genai-cloud": {

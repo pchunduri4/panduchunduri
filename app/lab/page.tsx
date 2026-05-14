@@ -2,10 +2,10 @@
 
 import { Sidebar } from "@/components/sidebar"
 import { motion } from "framer-motion"
-import { FlaskConical, ArrowUpRight, Activity, CheckCircle2, Clock, AlertCircle } from "lucide-react"
+import { FlaskConical, ArrowUpRight, Activity, CheckCircle2, Clock, AlertCircle, ShieldCheck } from "lucide-react"
 import Link from "next/link"
 
-type ExperimentStatus = "live" | "completed" | "pending" | "paused"
+type ExperimentStatus = "live" | "completed" | "pending" | "paused" | "phase2" | "framework" | "rnd"
 
 interface Experiment {
   title: string
@@ -19,64 +19,55 @@ interface Experiment {
 
 const experiments: Experiment[] = [
   {
-    title: "Agentic Commerce: AI Agent Product Discovery",
-    description: "Tracking how AI agents discover, evaluate, and recommend products. Building decision-grade product intelligence for machine decisions.",
-    status: "live",
-    hypothesis: "Structured product data increases agent selection rate by 40%+",
-    metric: "+47% agent citations",
-    progress: 72,
+    title: "Agentic Catalog Orchestration",
+    description:
+      "Solving for token-limit bottlenecks and state-management in 10M+ SKU RAG environments.",
+    status: "phase2",
+    hypothesis: "Partitioned memory and token routing reduce abstention without sacrificing citation quality.",
+    metric: "Phase 2 deployment",
+    progress: 68,
     href: "/lab/agentic-commerce",
   },
   {
-    title: "CDQ Scoring System",
+    title: "Catalog Fidelity Index (CFI)",
     description:
-      "Proprietary heuristic for measuring factual grounding in multi-modal retail catalogs.",
+      "A proprietary scoring framework for measuring factual grounding and semantic relevance in multi-modal LLM outputs.",
     status: "live",
-    hypothesis: "CDQ scores predict AI agent eligibility with 90%+ accuracy",
-    metric: "87% correlation",
-    progress: 65,
-    href: "/lab/cdq-scoring",
+    hypothesis: "CFI thresholds predict safe agent eligibility better than legacy merchandising scores.",
+    metric: "Operational",
+    progress: 82,
+    href: "/lab/catalog-fidelity-index",
   },
   {
-    title: "Wharton Angel Due Diligence Framework",
-    description: "Systematic evaluation methodology for AI startup investments. Business plan analysis, market fit assessment, and risk scoring.",
-    status: "completed",
-    hypothesis: "Framework improves investment decision accuracy by 25%",
-    metric: "32 deals analyzed",
-    progress: 100,
-    href: "/lab/angel-investing",
-  },
-  {
-    title: "Google Cloud GenAI Integration",
-    description: "Implementing business-driven AI strategy with Gemini and Vertex AI. Building scalable, outcome-focused AI products.",
-    status: "completed",
-    hypothesis: "Vertex AI reduces time-to-production for GenAI features by 60%",
-    metric: "Certified",
-    progress: 100,
-    href: "/lab/genai-cloud",
-  },
-  {
-    title: "Smart Home Privacy & Transparency",
-    description: "Teep startup learnings: Increasing data privacy, safety, and transparency for smart home customers.",
-    status: "paused",
-    hypothesis: "Privacy-first approach increases user trust by 50%",
-    metric: "Startup pivoted",
-    progress: 45,
-    href: "/lab/smart-home",
-  },
-  {
-    title: "Responsible AI Trade-offs Framework",
-    description: "Practical decision framework for balancing AI capability vs. responsible AI considerations in product development.",
-    status: "live",
-    hypothesis: "Framework reduces AI risk incidents by 35%",
-    metric: "In validation",
-    progress: 55,
+    title: "Responsible AI & Governance",
+    description:
+      "Risk mitigation protocols for autonomous buying agents—budget guardrails and factual fidelity gates.",
+    status: "framework",
+    hypothesis: "Tiered controls reduce incident severity while keeping agent throughput economically viable.",
+    metric: "Framework established",
+    progress: 90,
     href: "/lab/responsible-ai",
+  },
+  {
+    title: "Multi-Modal Ingestion Engine",
+    description:
+      "Transitioning unstructured catalog assets (images/PDFs) to decision-grade structured data for agents.",
+    status: "rnd",
+    hypothesis: "Quarantine-first promotion cuts silent factual errors at the graph boundary.",
+    metric: "In R&D",
+    progress: 42,
+    href: "/lab/multimodal-ingestion",
   },
 ]
 
-const statusConfig: Record<ExperimentStatus, { icon: typeof Activity; color: string; bg: string; label: string }> = {
-  live: { icon: Activity, color: "text-green-600", bg: "bg-green-100", label: "Live" },
+const statusConfig: Record<
+  ExperimentStatus,
+  { icon: typeof Activity; color: string; bg: string; label: string }
+> = {
+  live: { icon: Activity, color: "text-emerald-800", bg: "bg-emerald-50", label: "Operational" },
+  phase2: { icon: Activity, color: "text-amber-900", bg: "bg-amber-50", label: "Phase 2 Deployment" },
+  framework: { icon: ShieldCheck, color: "text-primary", bg: "bg-accent", label: "Framework Established" },
+  rnd: { icon: FlaskConical, color: "text-muted-foreground", bg: "bg-muted", label: "In R&D" },
   completed: { icon: CheckCircle2, color: "text-primary", bg: "bg-accent", label: "Completed" },
   pending: { icon: Clock, color: "text-amber-600", bg: "bg-amber-100", label: "Pending" },
   paused: { icon: AlertCircle, color: "text-muted-foreground", bg: "bg-muted", label: "Paused" },
@@ -99,16 +90,16 @@ export default function LabPage() {
                 <FlaskConical className="w-6 h-6 text-accent-foreground" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-foreground">5XEdge Lab</h1>
-                <p className="text-sm text-muted-foreground">Experimental projects</p>
+                <h1 className="text-2xl font-bold text-foreground">Platform Lab</h1>
+                <p className="text-sm text-muted-foreground">Strategic workstreams in flight</p>
               </div>
             </div>
             <p className="text-muted-foreground max-w-2xl">
-              Active experiments in GenAI product development, agentic commerce, and angel investing. Testing hypotheses from hyperscale retail, Wharton Alumni Angels, and startup experience.
+              Product-led experiments grounded in catalog scale, agentic surfaces, and governance—aligned
+              with what ships on the roadmap, not slide-only research.
             </p>
           </motion.div>
 
-          {/* Experiment Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {experiments.map((experiment, index) => {
               const status = statusConfig[experiment.status]
@@ -136,9 +127,7 @@ export default function LabPage() {
                     <h2 className="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors mb-2">
                       {experiment.title}
                     </h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                      {experiment.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{experiment.description}</p>
 
                     <div className="p-3 bg-secondary rounded-lg mb-4">
                       <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Hypothesis</p>
@@ -151,11 +140,11 @@ export default function LabPage() {
                         <div className="h-1.5 bg-muted rounded-full overflow-hidden">
                           <div
                             className={`h-full rounded-full transition-all duration-500 ${
-                              experiment.status === "completed"
+                              experiment.status === "live" || experiment.status === "framework"
                                 ? "bg-primary"
-                                : experiment.status === "live"
-                                ? "bg-green-500"
-                                : "bg-muted-foreground"
+                                : experiment.status === "phase2"
+                                  ? "bg-amber-500"
+                                  : "bg-muted-foreground"
                             }`}
                             style={{ width: `${experiment.progress}%` }}
                           />

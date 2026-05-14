@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { GraduationCap, Brain, Search, Sparkles } from "lucide-react"
 import { InsightCard } from "./insight-card"
-import { LiveExperiments } from "./live-experiments"
+import { StrategicWorkstreams } from "./strategic-workstreams"
 import { CommandSearch } from "./command-search"
 import { StrategicDispatch } from "./strategic-dispatch"
 
@@ -126,7 +126,7 @@ export function Dashboard() {
         </section>
 
         <section>
-          <LiveExperiments />
+          <StrategicWorkstreams />
         </section>
       </main>
     </div>

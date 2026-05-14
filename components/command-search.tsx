@@ -43,8 +43,8 @@ const searchResults = [
     category: "The Forge",
     items: [
       { title: "Agentic Commerce: AI Agent Product Discovery", href: "/lab/agentic-commerce" },
-      { title: "AI Startup Due Diligence: Asymmetric Acquisitions", href: "/lab/angel-investing" },
-      { title: "Cloud GenAI Integration Patterns", href: "/lab/genai-cloud" },
+      { title: "Catalog Fidelity Index (CFI)", href: "/lab/catalog-fidelity-index" },
+      { title: "Multi-Modal Ingestion Engine", href: "/lab/multimodal-ingestion" },
     ],
   },
 ]
