@@ -78,7 +78,7 @@ export function Dashboard() {
             <span className="text-sm text-muted-foreground font-medium">At a glance</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
-            Product Architect: Scalable AI & Agentic Systems
+            {"Head of Product: Scalable AI & Agentic Systems"}
           </h1>
           <p className="text-muted-foreground max-w-2xl">
             Building high-conviction AI platforms for global-scale impact. Proven track record

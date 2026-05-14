@@ -14,16 +14,16 @@ const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Pandu Chunduri',
-  jobTitle: 'AI Product Architect',
+  jobTitle: 'Head of Product, AI & Agentic Systems',
   description:
-    'Pandu Chunduri | AI Product Architect | Retail Automation Expert | AEO Specialist.',
+    'Pandu Chunduri | Head of Product, AI & Agentic Systems | Retail automation & AEO.',
   url: 'https://panduchunduri.com',
 }
 
 export const metadata: Metadata = {
-  title: 'Pandu Chunduri | AI Product Architect | Retail Automation Expert | AEO Specialist',
+  title: 'Pandu Chunduri | Head of Product, AI & Agentic Systems | Retail & AEO',
   description:
-    'Pandu Chunduri | AI Product Architect | Retail Automation Expert | AEO Specialist. Pure-play AI leadership: enterprise agentic systems, catalog automation, and AEO/GEO at global retail scale.',
+    'Pandu Chunduri | Head of Product, AI & Agentic Systems. Product leadership for enterprise agentic systems, catalog automation, and AEO/GEO at global retail scale.',
   icons: {
     icon: [
       {

@@ -128,7 +128,9 @@ export function Sidebar() {
             </div>
             <div>
               <h2 className="font-semibold text-sidebar-foreground">Pandu Chunduri</h2>
-              <p className="text-sm text-muted-foreground">AI Product Architect</p>
+              <p className="text-sm text-muted-foreground leading-snug">
+                {"Head of Product: AI & Agentic Systems"}
+              </p>
             </div>
           </div>
           <p className="text-xs text-muted-foreground leading-relaxed">

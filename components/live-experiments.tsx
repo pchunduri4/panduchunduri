@@ -8,7 +8,8 @@ import {
   Clock,
   AlertCircle,
   ArrowUpRight,
-  Terminal,
+  ListTree,
+  Workflow,
 } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -22,6 +23,7 @@ import {
 import { cn } from "@/lib/utils"
 
 type ExperimentStatus = "live" | "completed" | "pending" | "paused" | "peerReview"
+type SpecKind = "logic" | "flow"
 
 interface Experiment {
   id: string
@@ -30,7 +32,9 @@ interface Experiment {
   metric: string
   progress: number
   href: string
-  technicalNote: string
+  specKind: SpecKind
+  /** Product architecture spec: strategy + feasibility framing, high-level pseudo-logic (not implementation). */
+  architectureSpec: string
 }
 
 const experiments: Experiment[] = [
@@ -41,23 +45,44 @@ const experiments: Experiment[] = [
     metric: "+47% agent citations",
     progress: 72,
     href: "/lab/agentic-commerce",
-    technicalNote: `// experiments/agentic-commerce/scenarios.ts
-/**
- * Peer review: agent selection vs. catalog structure
- */
-export const SCENARIO_SEED = [
-  "compare_skus_same_brand",
-  "bundle_compatibility_strict",
-  "return_policy_window",
-] as const;
+    specKind: "logic",
+    architectureSpec: `PRODUCT STRATEGY
+  Intent: Treat agent-led discovery as a revenue lever only when trust and
+  citation quality move together—optimize for "selected in agent flows,"
+  not raw token spend.
 
-// Retrieval budget per turn (USD-ish proxy)
-const MAX_CONTEXT_TOKENS = 6_500;
+TECHNICAL FEASIBILITY
+  Position: Gates must be enforceable in-product (not slide-deck only).
+  Non-negotiables: abstention paths, evidence lineage, category-specific
+  risk appetite signed by product + legal.
 
-function scoreAgentCitationLift(baseline: number, structured: number) {
-  // internal notebook — not production code
-  return (structured - baseline) / baseline;
-}`,
+─── BUSINESS LOGIC (PSEUDO) ───
+
+ON customer_intent (browse | compare | checkout_adjacent):
+  resolve_catalog_entities(intent)
+
+  // Factual fidelity gate (product-defined)
+  IF any_claim LACKS corroborating_source IN policy_allowlist:
+    RETURN abstain_or_human_handoff
+    // Feasibility: model may not "fill in" attributes
+
+  // Risk thresholds (policy tiers)
+  IF use_case IN {checkout_assist, returns_eligibility, warranty}:
+    REQUIRE confidence_band >= HIGH
+    REQUIRE human_review_queue IF dispute_rate > RISK_THRESHOLD
+
+  IF use_case IN {inspiration_discovery}:
+    REQUIRE confidence_band >= MEDIUM
+    ALLOW softer_abstention_copy
+
+  // Scenario coverage (product strategy → release)
+  IF core_commerce_scenarios NOT PASS evaluation_harness:
+    HOLD general_traffic_promotion
+    RUN iterative_catalog_fixes WITH owner_SLAs
+
+  IF all_gates_pass:
+    compose_agent_answer WITH mandatory_citations
+    LOG decision_trace FOR post_incident_review`,
   },
   {
     id: "2",
@@ -67,27 +92,39 @@ function scoreAgentCitationLift(baseline: number, structured: number) {
       "Proprietary heuristic for measuring factual grounding in multi-modal retail catalogs.",
     progress: 65,
     href: "/lab/cdq-scoring",
-    technicalNote: `// lib/cdq/heuristic.ts
-/**
- * CDQ — factual grounding in multi-modal catalogs
- * Proprietary blend; weights versioned per category.
- */
-type Subscore = "coverage" | "freshness" | "corroboration" | "conflict";
+    specKind: "flow",
+    architectureSpec: `PRODUCT STRATEGY
+  Sell CDQ as a release criterion: "Is this SKU/agent surface safe to ship?"
+  Buyers care about fewer incidents and faster remediation—not model weights.
 
-const WEIGHTS_V2: Record<Subscore, number> = {
-  coverage: 0.28,
-  freshness: 0.22,
-  corroboration: 0.38,
-  conflict: 0.12,
-};
+TECHNICAL FEASIBILITY
+  Heuristic must be explainable to merchants and auditors (sub-scores +
+  drivers), and stable enough to trend week-over-week.
 
-export function cdqGroundingHeuristic(
-  attrs: NormalizedAttributes,
-  evidence: EvidenceSpan[],
-): CDQScore {
-  const sub = computeSubscores(attrs, evidence);
-  return weightedSum(sub, WEIGHTS_V2);
-}`,
+─── SYSTEM FLOW (PSEUDO) ───
+
+INGEST normalized_attributes + evidence_spans
+
+STEP coverage_scan:
+  IF required_attributes MISSING OR stale_beyond_SLA:
+    FLAG coverage_debt → owner_queue
+
+STEP corroboration_alignment:
+  FOR each high_liability_claim:
+    REQUIRE >=1 independent_source IN trust_tier_allowlist
+    ELSE FLAG fidelity_block
+
+STEP conflict_detection:
+  IF supplier_feed CONTRADICTS golden_record:
+    ESCALATE merge_rule OR hold_publish
+
+STEP roll_up_scores:
+  CDQ_public = weighted_blend(coverage, corroboration, freshness, conflict)
+  ATTACH explainability_payload FOR UI + API
+
+RELEASE GATE (product policy):
+  IF CDQ_public < floor_for_use_case:
+    BLOCK agent_surface OR force_safe_mode`,
   },
   {
     id: "3",
@@ -96,17 +133,33 @@ export function cdqGroundingHeuristic(
     metric: "32 deals analyzed",
     progress: 100,
     href: "/lab/angel-investing",
-    technicalNote: `// diligence/scorecard.ts
-export type RiskFlag =
-  | "DATA_RIGHTS_UNKNOWN"
-  | "MODEL_LINEAGE_OPAQUE"
-  | "CONCENTRATION_TOP3";
+    specKind: "logic",
+    architectureSpec: `PRODUCT STRATEGY
+  Standardize how the partnership reviews AI deals: speed without blind spots.
+  Outcome is a comparable scorecard, not a novel each time.
 
-export function summarizeDeal(input: DealMemo): Scorecard {
-  const flags = detectFlags(input);
-  const memo = renderMemoTemplate(flags);
-  return { flags, memo, version: "2025.09" };
-}`,
+TECHNICAL FEASIBILITY
+  Artifacts must be lightweight enough for part-time reviewers; severity
+  rubric must map to clear "proceed / probe / pass" actions.
+
+─── LOGIC SPEC (PSEUDO) ───
+
+INPUT deal_memo + data_room_index
+
+SCORE product_pull, team_execution, market_structure
+
+FOR each known_failure_mode IN {data_rights, model_lineage, concentration}:
+  IF signal_present:
+    ADD risk_flag WITH evidence_pointer
+
+IF risk_flags INCLUDE "unresolved_data_rights":
+  DEFAULT recommendation = NO_GO until_remediation_plan
+
+IF concentration_top_customers > threshold:
+  REQUIRE mitigation_narrative OR downgrade valuation_band
+
+OUTPUT scorecard + partner_memo_template
+  // Strategy: comparable; Feasibility: time-boxed review SLAs`,
   },
   {
     id: "4",
@@ -115,20 +168,33 @@ export function summarizeDeal(input: DealMemo): Scorecard {
     metric: "Certified",
     progress: 100,
     href: "/lab/genai-cloud",
-    technicalNote: `// infra/vertex-router.ts
-// Canary + kill-switch pattern for GenAI endpoints
-export const ROUTING = {
-  primary: "gemini-1.5-pro",
-  fallback: "gemini-1.5-flash",
-  killSwitchEnv: "GENAI_ROUTING_DISABLED",
-} as const;
+    specKind: "flow",
+    architectureSpec: `PRODUCT STRATEGY
+  GenAI features ship only with explicit operating envelopes: who can be
+  impacted, what "off" looks like, and how cost scales with adoption.
 
-async function routeRequest(req: GenAIRequest) {
-  if (process.env[ROUTING.killSwitchEnv] === "1") {
-    throw new ServiceUnavailableError("routing disabled");
-  }
-  // ...
-}`,
+TECHNICAL FEASIBILITY
+  Routing, fallbacks, and kill switches must be owned by platform + SRE,
+  with product-visible SLOs—not hidden in ML notebooks.
+
+─── SYSTEM FLOW (PSEUDO) ───
+
+REQUEST arrives WITH tenant + risk_tier
+
+ROUTE model_tier:
+  IF risk_tier == HIGH: prefer_high_fidelity_model
+  ELSE: prefer_cost_efficient_model
+
+IF error_rate OR latency_p95 EXCEEDS SLO:
+  ACTIVATE fallback_model_path
+  NOTIFY product_dashboard
+
+IF executive_kill_switch OR policy_incident:
+  DISABLE generative_path
+  SERVE deterministic_experience
+
+POST_CALL:
+  EMIT usage + safety_signals FOR weekly_product_review`,
   },
   {
     id: "5",
@@ -137,20 +203,33 @@ async function routeRequest(req: GenAIRequest) {
     metric: "In validation",
     progress: 55,
     href: "/lab/responsible-ai",
-    technicalNote: `// governance/risk-matrix.ts
-export type Severity = "low" | "med" | "high";
+    specKind: "logic",
+    architectureSpec: `PRODUCT STRATEGY
+  Make trade-offs explicit: capability vs. latency vs. cost vs. harm surface.
+  Goal is defensible defaults per use-case tier, not one-off hero demos.
 
-export interface Control {
-  id: string;
-  owner: "legal" | "product" | "ml_ops";
-  slaHours: number;
-}
+TECHNICAL FEASIBILITY
+  Controls must bind to shipping artifacts (PRDs, flags, dashboards),
+  with owners—otherwise "responsible AI" stays a workshop handout.
 
-// Workshop artifact → typed controls for agentic surfaces
-export const DEFAULT_CONTROLS: Control[] = [
-  { id: "HITL_CHECKOUT", owner: "product", slaHours: 4 },
-  { id: "GROUNDING_REQUIRED", owner: "ml_ops", slaHours: 24 },
-];`,
+─── LOGIC SPEC (PSEUDO) ───
+
+CLASSIFY use_case_severity AS {low, medium, high}
+
+MAP severity → required_controls:
+  high   → human_in_loop_for_financial_outcomes + grounding_required
+  medium → grounding_required + escalation_path
+  low    → standard_logging + rate_limits
+
+FOR each planned_agent_surface:
+  IF required_controls NOT implementable_by_target_date:
+    RECLASSIFY scope OR push_date WITH exec_signoff
+
+RUN cross_review (product, legal, trust, eng):
+  IF disagreement ON residual_risk:
+    RECORD decision AND revisit_trigger (volume, incident, regulation)
+
+SHIP only WHEN control_matrix COMPLETE for severity_tier`,
   },
 ]
 
@@ -190,6 +269,18 @@ const statusConfig: Record<
   },
 }
 
+function specButtonLabel(kind: SpecKind) {
+  return kind === "logic" ? "Logic Spec" : "System Flow"
+}
+
+function SpecIcon({ kind, className }: { kind: SpecKind; className?: string }) {
+  return kind === "logic" ? (
+    <ListTree className={className} aria-hidden />
+  ) : (
+    <Workflow className={className} aria-hidden />
+  )
+}
+
 export function LiveExperiments() {
   const [noteForId, setNoteForId] = useState<string | null>(null)
   const active = experiments.find((e) => e.id === noteForId) ?? null
@@ -220,6 +311,7 @@ export function LiveExperiments() {
           {experiments.map((experiment, index) => {
             const status = statusConfig[experiment.status]
             const StatusIcon = status.icon
+            const btn = specButtonLabel(experiment.specKind)
 
             return (
               <motion.li
@@ -274,16 +366,16 @@ export function LiveExperiments() {
                   <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                 </Link>
 
-                <div className="flex items-center justify-end gap-2 px-6 pb-4 sm:pb-0 sm:flex-col sm:justify-center sm:border-l sm:border-border sm:bg-muted/20 sm:px-4 sm:min-w-[132px]">
+                <div className="flex items-center justify-end gap-2 px-6 pb-4 sm:pb-0 sm:flex-col sm:justify-center sm:border-l sm:border-border sm:bg-muted/20 sm:px-4 sm:min-w-[148px]">
                   <Button
                     type="button"
                     variant="outline"
                     size="sm"
-                    className="font-mono text-xs gap-1.5 h-8"
+                    className="text-xs gap-1.5 h-8"
                     onClick={() => setNoteForId(experiment.id)}
                   >
-                    <Terminal className="size-3.5" />
-                    Technical Note
+                    <SpecIcon kind={experiment.specKind} className="size-3.5 shrink-0" />
+                    {btn}
                   </Button>
                 </div>
               </motion.li>
@@ -293,28 +385,33 @@ export function LiveExperiments() {
       </div>
 
       <Dialog open={noteForId !== null} onOpenChange={(open) => !open && setNoteForId(null)}>
-        <DialogContent
-          showCloseButton
-          className={cn(
-            "max-h-[85vh] overflow-hidden gap-0 border-zinc-700 bg-[#1e1e1e] p-0 text-zinc-100 shadow-2xl sm:max-w-2xl",
-            "[&_[data-slot=dialog-close]]:text-zinc-400 [&_[data-slot=dialog-close]]:hover:text-zinc-100 [&_[data-slot=dialog-close]]:top-3 [&_[data-slot=dialog-close]]:right-3"
-          )}
-        >
+        <DialogContent className="max-h-[85vh] overflow-hidden gap-0 p-0 sm:max-w-2xl">
           {active && (
             <>
-              <DialogHeader className="border-b border-zinc-700 bg-zinc-900/80 px-4 py-3 text-left">
-                <DialogTitle className="flex items-center gap-2 font-mono text-sm font-medium text-zinc-100">
-                  <Terminal className="size-4 text-emerald-400" />
-                  <span className="truncate">{active.name}</span>
-                  <span className="text-zinc-500 font-normal">· technical note</span>
+              <DialogHeader className="border-b border-border bg-muted/40 px-5 py-4 text-left space-y-2">
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                  Product strategy · Technical feasibility
+                </p>
+                <DialogTitle className="flex flex-wrap items-center gap-2 text-base font-semibold text-foreground sm:text-lg">
+                  <SpecIcon kind={active.specKind} className="size-5 text-primary shrink-0" />
+                  <span className="leading-snug">{active.name}</span>
+                  <span className="text-muted-foreground font-normal text-sm">
+                    · {active.specKind === "logic" ? "Logic spec" : "System flow"}
+                  </span>
                 </DialogTitle>
                 <DialogDescription className="sr-only">
-                  Code-style technical note for {active.name}.
+                  Product architecture spec for {active.name}, emphasizing strategy and feasibility.
                 </DialogDescription>
               </DialogHeader>
-              <pre className="max-h-[min(60vh,520px)] overflow-auto p-4 text-[11px] leading-relaxed font-mono text-zinc-200">
-                <code>{active.technicalNote}</code>
-              </pre>
+              <div className="max-h-[min(60vh,520px)] overflow-auto px-5 py-4">
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                  Architecture-level view: what we optimize for commercially, what must be true in
+                  platform for this to ship safely—not implementation or stack choices.
+                </p>
+                <pre className="rounded-lg border border-border bg-muted/60 p-4 text-[11px] leading-relaxed font-mono text-foreground whitespace-pre-wrap">
+                  <code>{active.architectureSpec}</code>
+                </pre>
+              </div>
             </>
           )}
         </DialogContent>
