@@ -60,6 +60,11 @@ export function Sidebar() {
   const [isLibraryOpen, setIsLibraryOpen] = useState(true)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
 
+  const navIsActive = (href: string) => {
+    if (href === "/") return pathname === "/"
+    return pathname === href || pathname.startsWith(`${href}/`)
+  }
+
   const handleHomeNavigation = (e: MouseEvent<HTMLAnchorElement>) => {
     setIsMobileOpen(false)
     if (pathname === "/") {
@@ -75,7 +80,7 @@ export function Sidebar() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="fixed top-4 left-4 z-50 p-2 rounded-lg bg-background border border-border lg:hidden"
+        className="fixed top-4 left-4 z-50 p-2 rounded-lg bg-background border border-border shadow-sm lg:hidden"
         aria-label="Toggle menu"
       >
         {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -87,7 +92,7 @@ export function Sidebar() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/20 z-40 lg:hidden"
+          className="fixed inset-0 bg-foreground/10 z-40 lg:hidden"
           onClick={() => setIsMobileOpen(false)}
         />
       )}
@@ -100,7 +105,7 @@ export function Sidebar() {
         }}
         className={cn(
           "fixed left-0 top-0 h-full w-[280px] bg-sidebar border-r border-sidebar-border z-50",
-          "flex flex-col",
+          "flex flex-col shadow-sm lg:shadow-none",
           "lg:translate-x-0"
         )}
       >
@@ -112,7 +117,7 @@ export function Sidebar() {
           className="block p-6 border-b border-sidebar-border hover:bg-sidebar-accent/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
         >
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-12 h-12 rounded-full overflow-hidden bg-primary/10 flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-full overflow-hidden bg-secondary flex items-center justify-center shrink-0 ring-1 ring-border">
               <Image
                 src="/pandu-chunduri.jpg"
                 alt="Pandu Chunduri"
@@ -161,11 +166,27 @@ export function Sidebar() {
                   <Link
                     href={item.href}
                     onClick={() => setIsMobileOpen(false)}
-                    className="flex items-start gap-3 px-3 py-2.5 rounded-lg hover:bg-sidebar-accent group transition-all duration-150"
+                    className={cn(
+                      "flex items-start gap-3 px-3 py-2.5 rounded-lg border-l-[3px] border-transparent transition-all duration-150",
+                      "hover:bg-sidebar-accent group",
+                      navIsActive(item.href) && "bg-accent border-l-primary shadow-sm"
+                    )}
                   >
-                    <item.icon className="w-5 h-5 mt-0.5 text-muted-foreground group-hover:text-sidebar-accent-foreground transition-colors" />
+                    <item.icon
+                      className={cn(
+                        "w-5 h-5 mt-0.5 text-muted-foreground transition-colors",
+                        "group-hover:text-primary",
+                        navIsActive(item.href) && "text-primary"
+                      )}
+                    />
                     <div>
-                      <span className="text-sm font-medium text-sidebar-foreground group-hover:text-sidebar-accent-foreground transition-colors">
+                      <span
+                        className={cn(
+                          "text-sm font-medium text-sidebar-foreground transition-colors",
+                          "group-hover:text-foreground",
+                          navIsActive(item.href) && "text-foreground font-semibold"
+                        )}
+                      >
                         {item.title}
                       </span>
                       <p className="text-xs text-muted-foreground mt-0.5">
@@ -189,10 +210,26 @@ export function Sidebar() {
               <Link
                 href="/"
                 onClick={handleHomeNavigation}
-                className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-sidebar-accent group transition-all duration-150"
+                className={cn(
+                  "flex items-center gap-3 px-3 py-2 rounded-lg border-l-[3px] border-transparent transition-all duration-150",
+                  "hover:bg-sidebar-accent group",
+                  navIsActive("/") && "bg-accent border-l-primary shadow-sm"
+                )}
               >
-                <BookOpen className="w-5 h-5 text-muted-foreground group-hover:text-sidebar-accent-foreground transition-colors" />
-                <span className="text-sm font-medium text-sidebar-foreground group-hover:text-sidebar-accent-foreground transition-colors">
+                <BookOpen
+                  className={cn(
+                    "w-5 h-5 text-muted-foreground transition-colors",
+                    "group-hover:text-primary",
+                    navIsActive("/") && "text-primary"
+                  )}
+                />
+                <span
+                  className={cn(
+                    "text-sm font-medium text-sidebar-foreground transition-colors",
+                    "group-hover:text-foreground",
+                    navIsActive("/") && "text-foreground font-semibold"
+                  )}
+                >
                   Strategic Dispatch
                 </span>
               </Link>

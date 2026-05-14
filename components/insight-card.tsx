@@ -30,7 +30,7 @@ export function InsightCard({
     >
       <Link
         href={href}
-        className="block h-full p-6 bg-card border border-zinc-800/50 rounded-xl hover:border-primary/40 transition-all duration-150"
+        className="block h-full p-6 bg-card border border-border rounded-xl shadow-sm hover:border-primary/50 hover:shadow-md transition-all duration-150"
       >
         {/* Header */}
         <div className="flex items-start justify-between mb-4">

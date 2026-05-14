@@ -64,8 +64,8 @@ const statusConfig: Record<
 > = {
   live: {
     icon: Activity,
-    color: "text-emerald-400",
-    bg: "bg-emerald-950/50",
+    color: "text-green-700",
+    bg: "bg-green-50",
     label: "Live",
   },
   completed: {
@@ -88,15 +88,15 @@ const statusConfig: Record<
   },
   peerReview: {
     icon: Clock,
-    color: "text-amber-400",
-    bg: "bg-amber-950/40",
+    color: "text-amber-800",
+    bg: "bg-amber-50",
     label: "In Peer Review",
   },
 }
 
 export function LiveExperiments() {
   return (
-    <div className="bg-card border border-zinc-800/50 rounded-xl overflow-hidden">
+    <div className="bg-card border border-border rounded-xl overflow-hidden shadow-sm">
       {/* Header */}
       <div className="px-6 py-4 border-b border-border flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -165,7 +165,7 @@ export function LiveExperiments() {
                         experiment.status === "completed"
                           ? "bg-primary"
                           : experiment.status === "live"
-                          ? "bg-green-500"
+                          ? "bg-green-600"
                           : experiment.status === "peerReview"
                           ? "bg-amber-500"
                           : "bg-muted-foreground"

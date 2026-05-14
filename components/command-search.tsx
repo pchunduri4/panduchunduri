@@ -102,7 +102,7 @@ export function CommandSearch() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 z-[100]"
+              className="fixed inset-0 bg-foreground/20 z-[100]"
               onClick={() => setIsOpen(false)}
             />
 
@@ -112,7 +112,7 @@ export function CommandSearch() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
               transition={{ duration: 0.15 }}
-              className="fixed top-[20%] left-1/2 -translate-x-1/2 w-full max-w-xl bg-background border border-border rounded-xl shadow-2xl z-[101] overflow-hidden"
+              className="fixed top-[20%] left-1/2 -translate-x-1/2 w-full max-w-xl bg-popover border border-border rounded-xl shadow-lg z-[101] overflow-hidden"
             >
               {/* Search Input */}
               <div className="flex items-center gap-3 px-4 py-4 border-b border-border">
