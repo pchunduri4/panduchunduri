@@ -10,6 +10,15 @@ import { StrategicDispatch } from "./strategic-dispatch"
 /** Three pillar theses — concise one-liners; full depth lives on each route. */
 const pillarTheses = [
   {
+    title: "Beyond SEO: Preparing for the Agentic Era",
+    thesis:
+      "AEO / GEO: decision-grade product data, citations, and what breaks when humans stop being the only shopper.",
+    readTime: "12 min",
+    category: "AEO/GEO & Future of Search (The Edge)",
+    icon: Search,
+    href: "/aeo-geo/agentic-era",
+  },
+  {
     title: "Architecting $1B+ AI Platforms",
     thesis:
       "Agentic commerce at catalog scale: orchestration, grounding, and enterprise value when millions of SKUs meet real-time LLMs.",
@@ -26,15 +35,6 @@ const pillarTheses = [
     category: "Scaling & Platform Strategy (The Calculus)",
     icon: GraduationCap,
     href: "/strategy/ai-evolution",
-  },
-  {
-    title: "Beyond SEO: Preparing for the Agentic Era",
-    thesis:
-      "AEO / GEO: decision-grade product data, citations, and what breaks when humans stop being the only shopper.",
-    readTime: "12 min",
-    category: "AEO/GEO & Future of Search (The Edge)",
-    icon: Search,
-    href: "/aeo-geo/agentic-era",
   },
 ]
 
