@@ -2,7 +2,13 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, Command, FileText, Brain, FlaskConical, ArrowRight } from "lucide-react"
+import { Search, Command, FileText, Brain, FlaskConical, ArrowRight, Sparkles } from "lucide-react"
+import { DISPATCH_SNAPSHOTS } from "@/lib/dispatch-snapshots"
+
+const dispatchSearchItems = DISPATCH_SNAPSHOTS.map((s) => ({
+  title: s.title,
+  href: `/dispatch/${s.slug}`,
+}))
 
 const searchResults = [
   {
@@ -28,6 +34,10 @@ const searchResults = [
       { title: "Smart Mobility & IoT: $100M+ Product Lines", href: "/strategy/smart-mobility" },
       { title: "AI Platform Economics: Asymmetric ROI", href: "/strategy/platform-economics" },
     ],
+  },
+  {
+    category: "Strategic Dispatch",
+    items: dispatchSearchItems,
   },
   {
     category: "The Forge",
@@ -165,6 +175,9 @@ export function CommandSearch() {
                               )}
                               {category.category === "The Forge" && (
                                 <FlaskConical className="w-4 h-4 text-muted-foreground group-hover:text-accent-foreground" />
+                              )}
+                              {category.category === "Strategic Dispatch" && (
+                                <Sparkles className="w-4 h-4 text-muted-foreground group-hover:text-accent-foreground" />
                               )}
                               <span className="flex-1 text-sm text-foreground group-hover:text-accent-foreground">
                                 {item.title}

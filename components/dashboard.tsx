@@ -116,7 +116,8 @@ export function Dashboard() {
           <div className="mb-4">
             <h2 className="text-lg font-semibold text-foreground">Strategic Dispatch</h2>
             <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
-              Micro-insights and field notes—compact list between pillar theses.
+              Ten field notes with shareable URLs—open the slide-over from here, or send a{" "}
+              <span className="font-mono text-foreground/80">/dispatch/…</span> link directly.
             </p>
           </div>
           <div className="max-w-3xl">
