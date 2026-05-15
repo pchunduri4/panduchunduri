@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react"
 import { Sidebar } from "@/components/sidebar"
 import { DispatchExecutiveSnapshot } from "@/components/dispatch-executive-snapshot"
 import { getDispatchBySlug, getAllDispatchSlugs } from "@/lib/dispatch-snapshots"
+import { absoluteUrl, clipMetaDescription } from "@/lib/site-seo"
 
 export function generateStaticParams() {
   return getAllDispatchSlugs().map((slug) => ({ slug }))
@@ -15,20 +16,22 @@ type Props = { params: Promise<{ slug: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const s = getDispatchBySlug(slug)
-  if (!s) return { title: "Dispatch" }
-  const desc =
-    s.expertAnswer.length > 155 ? `${s.expertAnswer.slice(0, 152).trim()}…` : s.expertAnswer
+  if (!s) return { title: "Strategic dispatch" }
+  const desc = clipMetaDescription(s.expertAnswer)
+  const path = `/dispatch/${slug}`
   return {
-    title: `${s.title} | Strategic Dispatch`,
+    title: s.title,
     description: desc,
+    alternates: { canonical: absoluteUrl(path) },
     openGraph: {
-      title: `${s.title} | Strategic Dispatch`,
+      title: `${s.title} | Pandu Chunduri`,
       description: desc,
+      url: absoluteUrl(path),
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${s.title} | Strategic Dispatch`,
+      title: `${s.title} | Pandu Chunduri`,
       description: desc,
     },
   }

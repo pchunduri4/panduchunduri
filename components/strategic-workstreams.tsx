@@ -48,7 +48,7 @@ const workstreams: Workstream[] = [
     description:
       "Global-scale orchestration for token budgets, subgraph retrieval, and grounded agent responses across 10M+ SKUs.",
     progress: 68,
-    href: "/lab/agentic-commerce",
+    href: "/production-frameworks/agentic-commerce",
     specType: "logic",
     mermaid: `flowchart LR
   SKUs[SKU subgraphs] --> WM[Working memory]
@@ -67,7 +67,7 @@ const workstreams: Workstream[] = [
     description:
       "Enterprise metric layer for factual grounding, semantic relevance, and multi-modal evidence in agent-facing catalog outputs.",
     progress: 82,
-    href: "/lab/catalog-fidelity-index",
+    href: "/production-frameworks/catalog-fidelity-index",
     specType: "metric",
     mermaid: `flowchart TB
   MM[Multi-modal evidence] --> CFI[CFI composite]
@@ -88,7 +88,7 @@ const workstreams: Workstream[] = [
     description:
       "System-wide controls for autonomous buying and negotiation: budget envelopes, fidelity gates, and auditable escalation paths.",
     progress: 90,
-    href: "/lab/responsible-ai",
+    href: "/production-frameworks/responsible-ai",
     specType: "flow",
     mermaid: `flowchart LR
   AG[Autonomous agent] --> BG[Budget guardrails]
@@ -108,7 +108,7 @@ const workstreams: Workstream[] = [
     description:
       "Ingestion spine for unstructured global supplier assets—PDFs, imagery, tables—promoted into decision-grade structured graph for agents.",
     progress: 42,
-    href: "/lab/multimodal-ingestion",
+    href: "/production-frameworks/multimodal-ingestion",
     specType: "logic",
     mermaid: `flowchart LR
   RAW[PDFs images tables] --> NORM[Normalize and extract]
@@ -214,7 +214,7 @@ export function StrategicWorkstreams() {
             </div>
           </div>
           <Link
-            href="/lab"
+            href="/production-frameworks"
             className="text-sm text-primary hover:text-primary/80 flex items-center gap-1 transition-colors shrink-0"
           >
             View lab

@@ -41,8 +41,8 @@ const libraryItems = [
   {
     title: "The Forge",
     icon: FlaskConical,
-    href: "/lab",
-    description: "Experimental Lab",
+    href: "/production-frameworks",
+    description: "Production frameworks & catalog-scale lab work.",
   },
 ]
 
@@ -117,7 +117,7 @@ export function Sidebar() {
             <div>
               <h2 className="font-semibold text-sidebar-foreground">Pandu Chunduri</h2>
               <p className="text-sm text-muted-foreground leading-snug">
-                {"Head of Product: AI & Agentic Systems"}
+                Product Leader · Walmart Global Tech
               </p>
             </div>
           </div>
@@ -217,6 +217,62 @@ export function Sidebar() {
                   )}
                 >
                   Dashboard & field notes
+                </span>
+              </Link>
+            </li>
+          </ul>
+
+          <div className="px-4 mt-6 mb-2">
+            <span className="text-xs font-semibold text-foreground uppercase tracking-wider">
+              Positioning pillars
+            </span>
+          </div>
+          <ul className="px-2 space-y-1 mb-2">
+            <li>
+              <Link
+                href="/agentic-ai-product-leadership"
+                onClick={() => setIsMobileOpen(false)}
+                className={cn(
+                  "flex items-center gap-3 px-3 py-2 rounded-lg border-l-[3px] border-transparent transition-all duration-150",
+                  "hover:bg-sidebar-accent group",
+                  pathname.startsWith("/agentic-ai-product-leadership") &&
+                    "bg-accent border-l-primary shadow-sm"
+                )}
+              >
+                <span className="text-sm font-medium text-sidebar-foreground group-hover:text-foreground">
+                  Agentic AI leadership
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/aeo-geo-optimization-strategy"
+                onClick={() => setIsMobileOpen(false)}
+                className={cn(
+                  "flex items-center gap-3 px-3 py-2 rounded-lg border-l-[3px] border-transparent transition-all duration-150",
+                  "hover:bg-sidebar-accent group",
+                  pathname.startsWith("/aeo-geo-optimization-strategy") &&
+                    "bg-accent border-l-primary shadow-sm"
+                )}
+              >
+                <span className="text-sm font-medium text-sidebar-foreground group-hover:text-foreground">
+                  AEO & GEO strategy
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/adtech-hyper-personalization"
+                onClick={() => setIsMobileOpen(false)}
+                className={cn(
+                  "flex items-center gap-3 px-3 py-2 rounded-lg border-l-[3px] border-transparent transition-all duration-150",
+                  "hover:bg-sidebar-accent group",
+                  pathname.startsWith("/adtech-hyper-personalization") &&
+                    "bg-accent border-l-primary shadow-sm"
+                )}
+              >
+                <span className="text-sm font-medium text-sidebar-foreground group-hover:text-foreground">
+                  AdTech personalization
                 </span>
               </Link>
             </li>

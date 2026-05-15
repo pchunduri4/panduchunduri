@@ -12,6 +12,23 @@ const dispatchSearchItems = DISPATCH_SNAPSHOTS.map((s) => ({
 
 const searchResults = [
   {
+    category: "Positioning pillars",
+    items: [
+      {
+        title: "Agentic AI & Autonomous Systems (Product leadership)",
+        href: "/agentic-ai-product-leadership",
+      },
+      {
+        title: "AEO & GEO Strategy for Enterprise",
+        href: "/aeo-geo-optimization-strategy",
+      },
+      {
+        title: "AdTech & AI Personalization at Scale",
+        href: "/adtech-hyper-personalization",
+      },
+    ],
+  },
+  {
     category: "The Anvil",
     items: [
       { title: "Architecting $1B+ AI Platforms: Enterprise Agentic Adoption", href: "/ai-systems/walmart-scale" },
@@ -42,9 +59,9 @@ const searchResults = [
   {
     category: "The Forge",
     items: [
-      { title: "Agentic Commerce: AI Agent Product Discovery", href: "/lab/agentic-commerce" },
-      { title: "Catalog Fidelity Index (CFI)", href: "/lab/catalog-fidelity-index" },
-      { title: "Multi-Modal Ingestion Engine", href: "/lab/multimodal-ingestion" },
+      { title: "Agentic Commerce: AI Agent Product Discovery", href: "/production-frameworks/agentic-commerce" },
+      { title: "Catalog Fidelity Index (CFI)", href: "/production-frameworks/catalog-fidelity-index" },
+      { title: "Multi-Modal Ingestion Engine", href: "/production-frameworks/multimodal-ingestion" },
     ],
   },
 ]

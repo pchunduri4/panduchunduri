@@ -7,6 +7,7 @@ import { StrategicWorkstreams } from "./strategic-workstreams"
 import { CommandSearch } from "./command-search"
 import { StrategicDispatch } from "./strategic-dispatch"
 import { ContactDialog } from "./contact-dialog"
+import { THESIS_SEARCH_URL } from "@/lib/hero-bio"
 
 /** Three pillar theses — concise one-liners; full depth lives on each route. */
 const pillarTheses = [
@@ -83,14 +84,30 @@ export function Dashboard() {
             <Sparkles className="w-5 h-5 text-primary" />
             <span className="text-sm text-muted-foreground font-medium">At a glance</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
-            {"Head of Product: Scalable AI & Agentic Systems"}
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 text-balance">
+            Pandu Chunduri
           </h1>
-          <p className="text-muted-foreground max-w-2xl">
-            Building high-conviction AI platforms for global-scale impact. Proven track record
-            orchestrating $1B+ value through enterprise agentic adoption and market defensibility
-            strategies.
-          </p>
+          <div className="text-base sm:text-lg text-muted-foreground max-w-3xl leading-relaxed space-y-4">
+            <p>
+              Product Leader at Walmart architecting <strong className="text-foreground">Agentic AI</strong>{" "}
+              and <strong className="text-foreground">AEO/GEO</strong> strategies at scale. I bridge enterprise
+              retail automation with a private equity owner-operator mindset, specializing in{" "}
+              <strong className="text-foreground">AdTech</strong>{" "}
+              <strong className="text-foreground">hyper-personalization</strong> and autonomous systems.
+              Wharton-educated strategist obsessed with commercial ROI and the future of agentic commerce.
+            </p>
+            <p>
+              <span className="text-foreground font-medium">Explore the thesis:</span>{" "}
+              <a
+                href={THESIS_SEARCH_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary font-medium underline-offset-4 hover:underline break-all"
+              >
+                {THESIS_SEARCH_URL}
+              </a>
+            </p>
+          </div>
         </motion.div>
 
         {/* Pillar Theses — high-impact cards */}

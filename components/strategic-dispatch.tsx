@@ -157,7 +157,7 @@ export function StrategicDispatch() {
         <div className="flex flex-col gap-1 px-4 py-3 sm:px-5 bg-muted/20 border-t border-border text-[10px] sm:text-[11px] text-muted-foreground">
           <p>
             <span className="font-medium text-foreground/90">Intelligence stream</span> active since 2023 ·
-            Thinking consistent across the Project Infinity development cycle.
+            Thinking consistent across the Agentic Retail Automation Framework development cycle.
           </p>
           <p>
             <span className="font-medium text-foreground/90">Last update:</span>{" "}

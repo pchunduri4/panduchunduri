@@ -1,21 +1,22 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { ProjectTemplate } from "@/components/project-template"
-import { aiSystemsProjects } from "@/lib/supplementary-pages"
+import { Sidebar } from "@/components/sidebar"
+import { labProjects } from "@/lib/supplementary-pages"
 import { absoluteUrl, clipMetaDescription } from "@/lib/site-seo"
 
 export function generateStaticParams() {
-  return Object.keys(aiSystemsProjects).map((slug) => ({ slug }))
+  return Object.keys(labProjects).map((slug) => ({ slug }))
 }
 
 type Props = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const config = aiSystemsProjects[slug]
-  if (!config) return { title: "AI systems" }
+  const config = labProjects[slug]
+  if (!config) return { title: "Production frameworks" }
   const desc = clipMetaDescription(`${config.tagline} ${config.problem}`)
-  const path = `/ai-systems/${slug}`
+  const path = `/production-frameworks/${slug}`
   return {
     title: config.title,
     description: desc,
@@ -34,10 +35,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function AiSystemsProjectPage({ params }: Props) {
+export default async function ProductionFrameworksProjectPage({ params }: Props) {
   const { slug } = await params
-  const config = aiSystemsProjects[slug]
+  const config = labProjects[slug]
   if (!config) notFound()
 
-  return <ProjectTemplate {...config} />
+  return (
+    <div className="flex min-h-screen bg-background">
+      <Sidebar />
+      <div className="flex-1 lg:ml-[280px]">
+        <ProjectTemplate {...config} />
+      </div>
+    </div>
+  )
 }

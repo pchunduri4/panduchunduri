@@ -26,7 +26,7 @@ const experiments: Experiment[] = [
     hypothesis: "Partitioned memory and token routing reduce abstention without sacrificing citation quality.",
     metric: "Phase 2 deployment",
     progress: 68,
-    href: "/lab/agentic-commerce",
+    href: "/production-frameworks/agentic-commerce",
   },
   {
     title: "Catalog Fidelity Index (CFI)",
@@ -36,7 +36,7 @@ const experiments: Experiment[] = [
     hypothesis: "CFI thresholds predict safe agent eligibility better than legacy merchandising scores.",
     metric: "Operational",
     progress: 82,
-    href: "/lab/catalog-fidelity-index",
+    href: "/production-frameworks/catalog-fidelity-index",
   },
   {
     title: "Responsible AI & Governance",
@@ -46,7 +46,7 @@ const experiments: Experiment[] = [
     hypothesis: "Tiered controls reduce incident severity while keeping agent throughput economically viable.",
     metric: "Framework established",
     progress: 90,
-    href: "/lab/responsible-ai",
+    href: "/production-frameworks/responsible-ai",
   },
   {
     title: "Multi-Modal Ingestion Engine",
@@ -56,7 +56,7 @@ const experiments: Experiment[] = [
     hypothesis: "Quarantine-first promotion cuts silent factual errors at the graph boundary.",
     metric: "In R&D",
     progress: 42,
-    href: "/lab/multimodal-ingestion",
+    href: "/production-frameworks/multimodal-ingestion",
   },
 ]
 
